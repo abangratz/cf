@@ -1,0 +1,2 @@
+module Administration::ForumGroupsHelper
+end

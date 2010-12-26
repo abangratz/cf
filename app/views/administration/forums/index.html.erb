@@ -1,0 +1,24 @@
+<h1>Listing forums</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @forum_group.forums.each do |forum| %>
+  <tr>
+    <td><%= forum.name %></td>
+    <td><%= link_to 'Show', [:administration, @forum_group, forum] %></td>
+    <td><%= link_to 'Edit', edit_administration_forum_group_forum_path(@forum_group, forum) %></td>
+    <td><%= link_to 'Destroy', [:administration, @forum_group, forum], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Forum', new_administration_forum_group_forum_path(@forum_group) %>
+<%= link_to 'Back', administration_forum_group_path(@forum_group) %>

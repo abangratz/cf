@@ -1,0 +1,22 @@
+<h1>Listing forum_groups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @forum_groups.each do |forum_group| %>
+  <tr>
+    <td>
+      <h2><%= forum_group.name %></h2>
+      <%= render forum_group.forums %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
