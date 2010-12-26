@@ -1,0 +1,13 @@
+Thumbs.db
+tags
+rerun.txt
+capybara-*.html
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+vendor/ruby/**/*
+.*.swp
+config/database.yml
+nbproject/
+bin/
