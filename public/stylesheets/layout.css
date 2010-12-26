@@ -1,0 +1,49 @@
+div#main {
+	position: absolute;
+	left: 250px; right: 250px; top: 20px;
+}
+
+div.sequential {
+	margin: 5px 10px 0 10px;
+}
+
+div.clear {
+	clear: both;
+}
+
+div#banner {
+}
+
+div#menu {
+}
+
+div#menu > ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+div#menu > ul > li {
+	display: inline;
+	margin-left: 10px;
+}
+
+div#content {
+}
+
+div.article {
+}
+
+div.article_content {
+}
+
+div.article_footer {
+}
+
+div.article_footer > span.author {
+	float: left;
+}
+
+div.article_footer > span.changed {
+	float: right;
+}

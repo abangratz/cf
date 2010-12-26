@@ -1,0 +1,2 @@
+module Administration::ArticlesHelper
+end

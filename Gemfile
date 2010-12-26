@@ -7,6 +7,8 @@ gem 'rails', '3.0.3'
 gem 'jquery-rails'
 gem 'unicorn'
 gem 'capistrano'
+gem 'bluecloth'
+gem 'RedCloth'
 
 gem 'pg'
 

@@ -1,4 +1,14 @@
 Cf::Application.routes.draw do
+  get "administration" => 'administration#index'
+
+  resources :articles, :only => [:index, :show]
+
+  devise_for :admins
+
+  namespace :administration do
+    resources :articles
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
