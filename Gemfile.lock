@@ -166,6 +166,7 @@ GEM
     uuidtools (2.1.1)
     warden (1.0.3)
       rack (>= 1.0.0)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -189,3 +190,4 @@ DEPENDENCIES
   pg
   rails (= 3.0.3)
   unicorn
+  will_paginate (~> 3.0.pre2)
