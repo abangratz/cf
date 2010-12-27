@@ -6,6 +6,8 @@ class ForumGroup
 
   property :name, String
 
-  has n, :forums
+  has n, :forums, :order => [ :position.asc ]
+  
+  is :list
 
 end

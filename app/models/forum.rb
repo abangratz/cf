@@ -8,4 +8,6 @@ class Forum
 
   belongs_to :forum_group
 
+  is :list, :scope => :forum_group_id
+
 end

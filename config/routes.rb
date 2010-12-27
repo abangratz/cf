@@ -15,7 +15,14 @@ Cf::Application.routes.draw do
   namespace :administration do
     resources :articles
     resources :forum_groups do
-      resources :forums
+      collection do
+        post :prioritize
+      end
+      resources :forums do
+        collection do
+          post :prioritize
+        end
+      end
     end
   end
 

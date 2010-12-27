@@ -45,6 +45,8 @@ class Administration::ForumsController < AdministrationController
   def create
     @forum_group = ForumGroup.get(params[:forum_group_id])
     @forum = @forum_group.forums.new(params[:forum])
+    logger.debug("Forum")
+    logger.debug(@forum.to_yaml)
 
     respond_to do |format|
       if @forum.save
@@ -83,6 +85,23 @@ class Administration::ForumsController < AdministrationController
     respond_to do |format|
       format.html { redirect_to(administration_forum_group_forums_url(@forum_group)) }
       format.xml  { head :ok }
+    end
+  end
+
+  def prioritize
+    sort_order = params[:forum_order]
+    forum_group = ForumGroup.get(params[:forum_group_id])
+    logger.debug(forum_group)
+    forums = forum_group.forums
+    forums.each {|forum| 
+      logger.debug(forum)
+      forum.update(
+        :position => 
+        sort_order.index(forum.id.to_s)+1
+      ) 
+    }
+    respond_to do |format|
+      format.js { render :nothing => true, :status => 200 }
     end
   end
 end

@@ -1,7 +1,10 @@
 <h1>Listing forum_groups</h1>
+<% content_for :head do %>
+  <%= javascript_include_tag 'forums.js' %>
+<% end -%>
 
-<table>
-  <tr>
+<table id="groups-list">
+  <tr class="header">
     <th>Name</th>
     <th></th>
     <th></th>
@@ -9,7 +12,7 @@
   </tr>
 
 <% @forum_groups.each do |forum_group| %>
-  <tr>
+  <tr id="forum_group_order_<%= forum_group.id %>">
     <td><%= forum_group.name %></td>
     <td><%= link_to 'Show', administration_forum_group_forums_path(forum_group) %></td>
     <td><%= link_to 'Edit', edit_administration_forum_group_path(forum_group) %></td>

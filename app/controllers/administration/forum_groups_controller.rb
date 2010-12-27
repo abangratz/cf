@@ -3,7 +3,7 @@ class Administration::ForumGroupsController < AdministrationController
   # GET /forum_groups
   # GET /forum_groups.xml
   def index
-    @forum_groups = ForumGroup.all
+    @forum_groups = ForumGroup.all(:order => :position.asc )
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +42,7 @@ class Administration::ForumGroupsController < AdministrationController
   # POST /forum_groups.xml
   def create
     @forum_group = ForumGroup.new(params[:forum_group])
+    logger.debug(@forum_group.to_yaml)
 
     respond_to do |format|
       if @forum_group.save
@@ -79,6 +80,20 @@ class Administration::ForumGroupsController < AdministrationController
     respond_to do |format|
       format.html { redirect_to(administration_forum_groups_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def prioritize
+    sort_order = params[:forum_group_order]
+    forum_groups = ForumGroup.all
+    forum_groups.each {|group| 
+      group.update(
+        :position => 
+        sort_order.index(group.id.to_s)+1
+      ) 
+    }
+    respond_to do |format|
+      format.js { render :nothing => true, :status => 200 }
     end
   end
 end
