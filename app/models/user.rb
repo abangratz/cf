@@ -9,7 +9,6 @@ class User
 
   property :id, Serial
 
-  property :nickname, String
-
+  property :nickname, String, :required => true, :unique => true
 
 end
