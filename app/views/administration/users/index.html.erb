@@ -1,0 +1,21 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= link_to user.nickname, [:administration, user] %></td>
+    <td><%= link_to 'Edit', edit_administration_user_path(user) %></td>
+    <td><%= link_to 'Destroy', [:administration, user], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_administration_user_path %>

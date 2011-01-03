@@ -11,4 +11,8 @@ class User
 
   property :nickname, String, :required => true, :unique => true
 
+  has n, :roles, :through => Resource
+
+
+
 end

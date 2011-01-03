@@ -13,6 +13,7 @@ Cf::Application.routes.draw do
   devise_for :admins
 
   namespace :administration do
+    resources :users
     resources :articles
     resources :forum_groups do
       collection do

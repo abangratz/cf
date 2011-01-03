@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+%w(Administrator Officer Member Initiate Recruit Guest).each do |name|
+  Role.first_or_create(:name => name)
+end
+
+testy = User.first_or_create({:email => 'test@twincode.net'}, {:password => 'testing', :password_confirmation => 'testing', :nickname => 'Testy'})
+
+testy.roles = [Role.first(:name => 'Recruit')]
+testy.save
