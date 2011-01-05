@@ -1,0 +1,4 @@
+<h2><%= link_to topic.title, topic %></h2>
+<div><%= link_to("Edit", edit_topic_url(topic)) if topic.author == current_user %></div>
+<div><%= raw topic.body_html %></div>
+<div><em>Author: <%= topic.author.nickname %></em></div>

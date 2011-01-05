@@ -59,14 +59,14 @@ class Administration::UsersController < ApplicationController
   # PUT /administration/users/1.xml
   def update
     @user = User.find(params[:id])
-    @user.roles = []
-    @user.roles.save!
+    #@user.roles = []
+    #@user.save!
     links = RoleUser.all(:user_id => @user.id)
     logger.debug links.to_yaml
     params[:user].delete_if {|k, v| k =~ /^password/ && v == ""}
     params[:user][:roles].map! {|id| Role.get(id) } if params[:user][:roles]
     respond_to do |format|
-      if true # @user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user])
         format.html { redirect_to(administration_user_url(@user), :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else

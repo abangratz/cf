@@ -1,0 +1,4 @@
+<h2><%= reply.title %></h2>
+<div><%= link_to("Edit", edit_topic_reply_url(@topic, reply)) if reply.author == current_user %></div>
+<div><%= raw reply.body_html %></div>
+<div><em>Author: <%= reply.author.nickname %></em></div>

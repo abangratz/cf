@@ -12,7 +12,7 @@ class User
   property :nickname, String, :required => true, :unique => true
 
   has n, :roles, :through => Resource
-
-
+  has n, :topics, :child_key => [ :author_id ]
+  has n, :replies, :child_key => [ :author_id ]
 
 end

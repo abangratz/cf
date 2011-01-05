@@ -4,7 +4,6 @@ class ArticlesController < ApplicationController
   def index
     @title = "News"
     @articles = Article.paginate :page => params[:page], :order => :created_at.desc, :per_page => 5
-    logger.debug(@articles)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,4 +1,5 @@
 class ForumGroupsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /forum_groups
   # GET /forum_groups.xml
   def index

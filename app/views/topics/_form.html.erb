@@ -1,0 +1,33 @@
+<%= form_for([@forum_group, @forum, @topic]) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :rows => 25, :cols => 90 %>
+  </div>
+  <button id="toggle-mce">Toggle</button>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $('#topic_body').markItUp(mySettings);
+        });
+  </script>
+<% end -%>

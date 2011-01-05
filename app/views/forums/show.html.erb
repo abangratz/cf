@@ -1,0 +1,4 @@
+<h1><%= @forum.name %></h1>
+<div><%= link_to "New Topic", new_forum_group_forum_topic_url(@forum.forum_group, @forum) %></div>
+<%= render @forum.topics %>
+
