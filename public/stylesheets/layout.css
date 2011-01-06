@@ -1,6 +1,6 @@
 div#main {
 	position: absolute;
-	left: 250px; right: 250px; top: 20px;
+	left: 235px; right: 235px; top: 20px;
 }
 
 div.sequential {
@@ -12,6 +12,17 @@ div.clear {
 }
 
 div#banner {
+  height: 85px;
+}
+
+div#mainmenu {
+  position: relative;
+  text-align: right;
+  right: 15px;
+}
+
+div#pagemenu {
+  position: relative;
 }
 
 div.menu {
@@ -29,15 +40,22 @@ div.menu > ul > li {
 }
 
 div#content {
+  position: relative;
+  right: 5px;
+  left: 0px;
 }
 
 div.article {
+  margin: 0.5em 0 0.5em 0.5em;
+  padding: 5px;
 }
 
 div.article_content {
 }
 
 div.article_footer {
+  padding: 5px 2px 8px 2px;
+  margin: 0 0 5px 0;
 }
 
 div.article_footer > span.author {
@@ -46,4 +64,74 @@ div.article_footer > span.author {
 
 div.article_footer > span.changed {
 	float: right;
+}
+
+div.postings {
+  position: relative;
+}
+
+div.posting {
+  position: relative;
+  margin: 1em 0 1em 0;
+  padding: 0;
+}
+
+div.posting .author  .timestamp {
+  margin-top: 3px;
+  font-size: 0.9em;
+}
+div.posting .author {
+  bottom: 0;
+  top: 0;
+  float: left;
+  width: 90px;
+  position: relative;
+  padding: 1em;
+}
+
+div.posting .content {
+  bottom: 0;
+  top: 0;
+  margin-left: 120px;
+  padding: 0;
+}
+
+div.posting .header {
+  height: 2.5em;
+  vertical-align: middle;
+  background-color: silver;
+  padding: 5px;
+}
+div.posting .header > h2 {
+  margin: 6px 0 0 0;
+  padding: 0;
+  display: inline-block;
+  height: 2.8em;
+  vertical-align: middle;
+}
+
+div.posting .header .navigation {
+  float: right;
+}
+
+div.posting .content .body {
+  padding: 5px;
+}
+
+div.topic {
+  position: relative;
+  margin: 1em 0 1em 0;
+  padding: 0;
+}
+
+div.topic h2 {
+  margin: .3em;
+}
+
+div.topic .author {
+  margin: 0 0 .4em 1em;
+}
+
+div#breadcrumbs {
+  margin: 1.2em 0.2em;
 }

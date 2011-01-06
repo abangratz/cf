@@ -1,4 +1,16 @@
-<h1><%= @forum.name %></h1>
-<div><%= link_to "New Topic", new_forum_group_forum_topic_url(@forum.forum_group, @forum) %></div>
-<%= render @forum.topics %>
-
+<% content_for :head do %>
+  <%= javascript_include_tag 'forums' %>
+<% end -%>
+<div id="breadcrumbs" class="sequential">
+<%= link_to @forum.forum_group.name, forum_groups_url %> &gt; <%= @forum.name %>
+</div>
+<div id="content" class="sequential"><%= link_to "New Topic", new_forum_group_forum_topic_url(@forum.forum_group, @forum), :class => "navbutton" %>
+  <div id="postings">
+    <% @forum.topics.each do |topic| %>
+      <div class="topic">
+        <h2><%= link_to topic.title, topic %></h2>
+        <div class="author"> created by <%= topic.author.nickname %> at <%= l topic.created_at, :format => :short %></div>
+      </div>
+    <% end -%>
+  </div>
+</div>

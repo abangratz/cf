@@ -1,4 +1,10 @@
-<h2><%= reply.title %></h2>
-<div><%= link_to("Edit", edit_topic_reply_url(@topic, reply)) if reply.author == current_user %></div>
-<div><%= raw reply.body_html %></div>
-<div><em>Author: <%= reply.author.nickname %></em></div>
+<div class="posting">
+  <div class="author">Author:<%= reply.author.nickname %> <div class="timestamp"> at <%= l reply.created_at, :format => :short %></div></div>
+  <div class="content">
+    <div class="header">
+      <h2><%= reply.title %></h2>
+      <div class="navigation"><%= link_to("Edit", edit_topic_reply_url(@topic, reply), :class => "navbutton") if reply.author == current_user %></div>
+    </div>
+    <div class="body"><%= raw reply.body_html %></div>
+  </div>
+</div>

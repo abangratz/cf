@@ -3,11 +3,9 @@
   <%= javascript_include_tag 'forums.js' %>
 <% end -%>
 
-<table id="groups-list">
+<table id="drag-list" data-prioritize-url="<%= prioritize_administration_pages_path %>">
   <tr class="header">
     <th>Title</th>
-    <th>Body</th>
-    <th>Body html</th>
     <th></th>
     <th></th>
     <th></th>

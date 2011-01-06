@@ -2,7 +2,7 @@ class Administration::PagesController < AdministrationController
   # GET /pages
   # GET /pages.xml
   def index
-    @pages = Page.all
+    @pages = Page.all(:order => [:position.asc])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +42,8 @@ class Administration::PagesController < AdministrationController
   def create
     @page = Page.new(params[:page])
     @page.admin = current_admin
+    logger.debug(@page.body_html)
+    logger.debug(@page.slug)
 
     respond_to do |format|
       if @page.save
@@ -84,12 +86,12 @@ class Administration::PagesController < AdministrationController
   end
 
   def prioritize
-    sort_order = params[:forum_group_order]
-    forum_groups = ForumGroup.all
-    forum_groups.each {|group| 
-      group.update(
+    sort_order = params[:pages_order]
+    pages = Page.all
+    pages.each {|page| 
+      page.update(
         :position => 
-        sort_order.index(group.id.to_s)+1
+        sort_order.index(page.id.to_s)+1
       ) 
     }
     respond_to do |format|

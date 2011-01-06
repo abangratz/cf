@@ -1,22 +1,14 @@
-<h1>Listing forum_groups</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p id="notice"><%= notice %></p>
+<div id="content" class="sequential">
+    
+<h1>Critical Failure - Forum</h1>
 
 <% @forum_groups.each do |forum_group| %>
-  <tr>
-    <td>
-      <h2><%= forum_group.name %></h2>
-      <%= render forum_group.forums %>
-    </td>
-  </tr>
-<% end %>
-</table>
+  <fieldset>
+    <legend><%= forum_group.name %></legend>
+    <%= render forum_group.forums %>
+  </fieldset>
+<% end -%>
 
-<br />
 
+</div>

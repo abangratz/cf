@@ -1,5 +1,38 @@
+body, pre, p {
+  font-size: 12px;
+  font-family: Calibri, Helvetica, Verdana, sans-serif;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+h3 {
+  font-size: 1.1em;
+}
+
+div.article {
+  border: 1px solid grey;
+  border-bottom-left-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+  border-top-left-radius: 6px 6px;
+  border-top-right-radius: 6px 6px;
+}
+
 div.article > h2 {
-	border: 1px solid black;
 	font: bold 1.2em Verdana,sans;
 }
 
@@ -9,4 +42,37 @@ div.article_content {
 
 div.article_footer {
 	border-top: 1px solid black;
+}
+
+div#pagemenu  li:before {
+  content: "| ";
+}
+
+div.posting {
+  border: 1px solid grey;
+  border-bottom-left-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+  border-top-left-radius: 6px 6px;
+  border-top-right-radius: 6px 6px;
+}
+
+div.posting .author {
+  font-style: italic;
+  font-size; 0.8em;
+}
+div.posting .content {
+  border-left: 1px solid grey;
+}
+
+div.topic {
+  border: 1px solid grey;
+  border-bottom-left-radius: 6px 6px;
+  border-bottom-right-radius: 6px 6px;
+  border-top-left-radius: 6px 6px;
+  border-top-right-radius: 6px 6px;
+}
+
+div#breadcrumbs {
+  font-size: 1.5em;
+  font-weight: bold;
 }

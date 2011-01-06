@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
-  $("#groups-list").sortable(
+  $("a.navbutton").button();
+  $("input:submit").button();
+  if (mySettings) { $('#topic_body').markItUp(mySettings); }
+  $("#drag-list").sortable(
       {
         axis: 'y',
         dropOnEmpty: false,
@@ -8,31 +11,10 @@ jQuery(document).ready(function($) {
         opacity: 0.4,
         scroll: true,
         update: function(){
+          var update_url = $(this).attr('data-prioritize-url');
           $.ajax({
             type: 'post',
-            data: $('#groups-list').sortable('serialize'),
-            dataType: 'script',
-            complete: function(request){
-              $("#groups-list").effect('highlight');
-            },
-            url: '/administration/forum_groups/prioritize'
-          })
-        }
-      }
-      );
-  $("#forum-list").sortable(
-      {
-        axis: 'y',
-        dropOnEmpty: false,
-        cursor: 'crosshair',
-        items: 'tr:not(.header)',
-        opacity: 0.4,
-        scroll: true,
-        update: function(){
-          var update_url = $("#forum-list").attr('data-prioritize-url');
-          $.ajax({
-            type: 'post',
-            data: $('#forum-list').sortable('serialize'),
+            data: $('#drag-list').sortable('serialize'),
             dataType: 'script',
             complete: function(request){
               $("#forum-list").effect('highlight');

@@ -16,7 +16,7 @@ class Page
 
   is :list
 
-  validates_length_of :title, :minimum => 5
+  validates_length_of :title, :minimum => 3
 
   belongs_to :admin
 

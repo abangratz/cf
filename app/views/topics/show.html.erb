@@ -1,5 +1,14 @@
-<div><%= link_to "Reply", new_topic_reply_url(@topic) %></div>
-<%= render @topic %>
-<%= render @topic.replies %>
-<div><%= link_to "Reply", new_topic_reply_url(@topic) %></div>
-
+<% content_for :head do %>
+  <%= javascript_include_tag 'forums' %>
+<% end -%>
+<div id="content" class="sequential">
+  <div id="breadcrumbs" class="sequential">
+    <%= link_to @topic.forum.forum_group.name, forum_groups_url %> &gt; <%= @topic.forum.name %> 
+  </div>
+  <div><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" %></div>
+  <div id="postings">
+    <%= render @topic %>
+    <%= render @topic.replies %>
+  </div>
+  <div class="clear"><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" %></div>
+</div>
