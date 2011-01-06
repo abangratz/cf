@@ -14,16 +14,16 @@ div.clear {
 div#banner {
 }
 
-div#menu {
+div.menu {
 }
 
-div#menu > ul {
+div.menu > ul {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 }
 
-div#menu > ul > li {
+div.menu > ul > li {
 	display: inline;
 	margin-left: 10px;
 }

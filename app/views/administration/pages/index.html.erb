@@ -1,0 +1,28 @@
+<h1>Listing pages</h1>
+<% content_for :head do %>
+  <%= javascript_include_tag 'forums.js' %>
+<% end -%>
+
+<table id="groups-list">
+  <tr class="header">
+    <th>Title</th>
+    <th>Body</th>
+    <th>Body html</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pages.each do |page| %>
+  <tr id="pages_order_<%= page.id %>">
+    <td><%= page.title %></td>
+    <td><%= link_to 'Show', [:administration, page] %></td>
+    <td><%= link_to 'Edit', edit_administration_page_path(page) %></td>
+    <td><%= link_to 'Destroy', [:administration, page], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Page', new_administration_page_path %>

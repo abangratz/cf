@@ -1,19 +1,20 @@
-class Article
+class Page
 
   include DataMapper::Resource
 
   before :save, :sluggize
-  before :save, :convert_body
 
   property :id, Serial
 
-  property :title, String, :required => true, :unique => true
+  property :title, String
   property :body, Text
   property :body_html, Text
-  property :conversion, String
   property :slug, Slug
   property :created_at, DateTime
   property :updated_at, DateTime
+  property :in_menu, Boolean, :required => true, :default => false
+
+  is :list
 
   validates_length_of :title, :minimum => 5
 
@@ -27,8 +28,11 @@ class Article
     self.slug = self.title
   end
 
-  def convert_body
-    self.body_html = body.send(self.conversion.to_sym)
+  before :valid? do
+    if self.body
+      self.body.strip!
+      self.body_html = self.body.markdown
+    end
   end
 
 end

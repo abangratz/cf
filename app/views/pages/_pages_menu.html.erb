@@ -1,0 +1,6 @@
+<div id="pagemenu" class="menu sequential">
+<ul id="pagemenu">
+  <% @menu_pages.each do |page| %>
+    <li><%= link_to page.title, page %></li>
+  <% end -%>
+</ul></div>

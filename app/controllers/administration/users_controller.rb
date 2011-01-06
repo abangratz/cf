@@ -1,4 +1,4 @@
-class Administration::UsersController < ApplicationController
+class Administration::UsersController < AdministrationController
   before_filter :authenticate_admin!
   # GET /administration/users
   # GET /administration/users.xml

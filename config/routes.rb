@@ -1,5 +1,7 @@
 Cf::Application.routes.draw do
 
+  resources :pages, :only => [:index, :show]
+
   resources :topics, :only => [:show, :edit, :update] do
     resources :replies
   end
@@ -22,6 +24,11 @@ Cf::Application.routes.draw do
   namespace :administration do
     resources :users
     resources :articles
+    resources :pages do
+      collection do
+        post :prioritize
+      end
+    end
     resources :forum_groups do
       collection do
         post :prioritize
