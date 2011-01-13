@@ -23,6 +23,7 @@ gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 gem 'dm-is-list',           DM_VERSION
 gem 'dm-devise'
+gem 'dm-paperclip', :git => 'git://github.com/abangratz/dm-paperclip.git'
 
 gem 'will_paginate', '~> 3.0.pre2'
 

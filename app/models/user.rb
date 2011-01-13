@@ -14,5 +14,6 @@ class User
   has n, :roles, :through => Resource
   has n, :topics, :child_key => [ :author_id ]
   has n, :replies, :child_key => [ :author_id ]
+  has 1, :profile
 
 end

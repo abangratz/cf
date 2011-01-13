@@ -49,6 +49,7 @@ div#pagemenu  li:before {
 }
 
 div.posting {
+  padding-left: 0;
   border: 1px solid grey;
   border-bottom-left-radius: 6px 6px;
   border-bottom-right-radius: 6px 6px;
@@ -64,6 +65,9 @@ div.posting .content {
   border-left: 1px solid grey;
 }
 
+div.posting .author {
+}
+
 div.topic {
   border: 1px solid grey;
   border-bottom-left-radius: 6px 6px;
@@ -75,4 +79,19 @@ div.topic {
 div#breadcrumbs {
   font-size: 1.5em;
   font-weight: bold;
+}
+
+div.sigdisplay {
+  width: 65%;
+  height: 140px;
+  border: 1px solid silver;
+}
+
+div.posting .signature {
+  border-top: 1px solid silver;
+  background-color: #E8E8E8;
+}
+
+div.posting .footer {
+  border-top: 1px solid silver;
 }

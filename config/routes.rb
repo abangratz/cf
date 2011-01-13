@@ -1,5 +1,7 @@
 Cf::Application.routes.draw do
 
+  resource :profile, :except => [:destroy]
+
   resources :pages, :only => [:index, :show]
 
   resources :topics, :only => [:show, :edit, :update] do

@@ -1,0 +1,16 @@
+<h1>Profile</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @profile.avatar.url %>
+</p>
+<p>
+  <b>Signature:</b>
+  <div class="sigdisplay">
+  <%= raw @profile.signature_html %>
+  </div>
+</p>
+
+
+<%= link_to 'Edit', edit_profile_path, :class => "button" %> 

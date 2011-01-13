@@ -1,6 +1,7 @@
 div#main {
-	position: absolute;
-	left: 235px; right: 235px; top: 20px;
+  top: 20px;
+  margin: auto;
+  width: 765px;
 }
 
 div.sequential {
@@ -12,7 +13,7 @@ div.clear {
 }
 
 div#banner {
-  height: 85px;
+  height: 190px;
 }
 
 div#mainmenu {
@@ -84,9 +85,10 @@ div.posting .author {
   bottom: 0;
   top: 0;
   float: left;
-  width: 90px;
+  width: 97px;
   position: relative;
   padding: 1em;
+  height: 100%;
 }
 
 div.posting .content {
@@ -134,4 +136,8 @@ div.topic .author {
 
 div#breadcrumbs {
   margin: 1.2em 0.2em;
+}
+
+div.signature {
+  padding: 5px 5px 8px 15px;
 }
