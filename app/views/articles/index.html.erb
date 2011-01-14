@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div id="content" class="sequential">
-<%= paginated_section @articles do %>
+  <%= will_paginate(@articles, :class => 'test') %>
   <%= render @articles %>
-<% end -%>
+  <%= will_paginate(@articles, :class => 'test') %>
 </div>

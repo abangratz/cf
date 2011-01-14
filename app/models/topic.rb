@@ -14,7 +14,8 @@ class Topic
   belongs_to :author, :model => User
   has n, :replies
 
-  validates_length_of :body, :min => 10
+  validates_length_of :body, :minimum => 10
+  validates_length_of :title, :minimum => 3
 
   before :valid? do
     if self.body
