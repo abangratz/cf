@@ -7,7 +7,7 @@ set :deploy_to, "/var/www/blood-covenant.eu/#{application}"
 ssh_options[:forward_agent] = true
 
 set :scm, :git
-set :user, :blood-cov-eu
+set :user, :"blood-cov-eu"
 set :use_sudo, false
 
 set :rails_env, :production
