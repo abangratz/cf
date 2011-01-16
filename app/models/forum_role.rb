@@ -6,4 +6,5 @@ class ForumRole
 
   property :read, Boolean
   property :write, Boolean
+  property :moderate, Boolean
 end

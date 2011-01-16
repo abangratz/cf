@@ -46,7 +46,7 @@ class Administration::ForumGroupsController < AdministrationController
 
     respond_to do |format|
       if @forum_group.save
-        format.html { redirect_to([:administration, @forum_group], :notice => 'Forum group was successfully created.') }
+        format.html { redirect_to(administration_forum_groups_url, :notice => 'Forum group was successfully created.') }
         format.xml  { render :xml => @forum_group, :status => :created, :location => @forum_group }
       else
         format.html { render :action => "new" }
@@ -62,7 +62,7 @@ class Administration::ForumGroupsController < AdministrationController
 
     respond_to do |format|
       if @forum_group.update(params[:forum_group])
-        format.html { redirect_to([:administration, @forum_group], :notice => 'Forum group was successfully updated.') }
+        format.html { redirect_to(administration_forum_groups_url, :notice => 'Forum group was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

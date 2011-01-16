@@ -31,15 +31,11 @@
     <%= f.text_field :password_confirmation %>
   </div>
 
-  <fieldset>
-    <legend>Roles</legend>
-    <% @roles.each do |role| %>
-      <div style="inline-block">
-        <%= check_box_tag "user[roles][]", role.id, (@user.roles.include? role), :id => "user_roles_#{role.id}"%>
-        <%= label_tag "user_roles_#{role.id}", role.name %>
-      </div>
-    <% end -%>
-  </fieldset>
+  <div class="field">
+    <%= f.label :role_id, "Role" %><br />
+    <%= f.collection_select :role_id, @roles, :id, :name %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit %>

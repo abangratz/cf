@@ -38,13 +38,6 @@ class Administration::ForumsController < AdministrationController
   def edit
     @forum = Forum.get(params[:id])
     @forum_group = @forum.forum_group
-    @roles = Role.all
-    if (@roles.count != @forum.roles.count) 
-      @roles.each do |role|
-        next if role.in?(@forum.roles)
-        @forum.roles << role
-      end
-    end
     @forum.save
   end
 
@@ -56,15 +49,7 @@ class Administration::ForumsController < AdministrationController
 
     respond_to do |format|
       if @forum.save
-        permissions = params[:permission]
-        @forum.forum_roles.each do |forum_role|
-          if permissions[forum_role.role_id.to_s]
-            forum_role.read = permissions[forum_role.role_id.to_s][:read] == 'yes'
-            forum_role.write = permissions[forum_role.role_id.to_s][:write] == 'yes'
-            forum_role.save
-          end
-        end
-        format.html { redirect_to([:administration, @forum_group, @forum], :notice => 'Forum was successfully created.') }
+        format.html { redirect_to(edit_administration_forum_group_forum_url(@forum_group,@forum), :notice => 'Forum was successfully created. Please set permissions.') }
         format.xml  { render :xml => @forum, :status => :created, :location => @forum }
       else
         format.html { render :action => "new" }
@@ -85,10 +70,11 @@ class Administration::ForumsController < AdministrationController
           if permissions[forum_role.role_id.to_s]
             forum_role.read = permissions[forum_role.role_id.to_s][:read] == 'yes'
             forum_role.write = permissions[forum_role.role_id.to_s][:write] == 'yes'
+            forum_role.moderate = permissions[forum_role.role_id.to_s][:moderate] == 'yes'
             forum_role.save
           end
         end
-        format.html { redirect_to([:administration, @forum.forum_group, @forum], :notice => 'Forum was successfully updated.') }
+        format.html { redirect_to(administration_forum_group_forums_url(@forum.forum_group), :notice => 'Forum was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -102,7 +88,10 @@ class Administration::ForumsController < AdministrationController
   def destroy
     @forum = Forum.get(params[:id])
     @forum_group = @forum.forum_group
-    @forum.destroy
+    @forum.forum_roles.each do |link|
+      link.destroy
+    end
+    @forum.destroy!
 
     respond_to do |format|
       format.html { redirect_to(administration_forum_group_forums_url(@forum_group)) }

@@ -11,25 +11,25 @@ class User
 
   property :nickname, String, :required => true, :unique => true
 
-  has n, :roles, :through => Resource
+  belongs_to :role
   has n, :topics, :child_key => [ :author_id ]
   has n, :replies, :child_key => [ :author_id ]
   has 1, :profile
 
+  before :valid? do 
+    self.role = Role.first(:name => "Guest") if self.role.nil?
+  end
+
   def can_read(forum)
-    self.roles.each do |role|
-      forum_role = ForumRole.first(:forum_id => forum.id, :role_id => role.id)
-      return true if forum_role.read
-    end
-    false
+    ForumRole.first(:forum_id => forum.id, :role_id => self.role.id).read
   end
 
   def can_write(forum)
-    self.roles.each do |role|
-      forum_role = ForumRole.first(:forum_id => forum.id, :role_id => role.id)
-      return true if forum_role.write
-    end
-    false
+    ForumRole.first(:forum_id => forum.id, :role_id => self.role.id).read
+  end
+
+  def can_moderate(forum)
+    ForumRole.first(:forum_id => forum.id, :role_id => self.role.id).read
   end
 
   def forum_groups
