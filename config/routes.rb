@@ -4,7 +4,13 @@ Cf::Application.routes.draw do
 
   resources :pages, :only => [:index, :show]
 
-  resources :topics, :only => [:show, :edit, :update] do
+  resources :topics do
+    member do
+      get :sticky
+      get :unsticky
+      get :lock
+      get :unlock
+    end
     resources :replies
   end
 

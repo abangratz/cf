@@ -18,7 +18,7 @@ class Profile
   has_attached_file :avatar, :styles => {:original => '65x65>'}, :default_url => '/images/avatar/cf.png'
 
   def convert_signature
-    self.signature_html = signature.bbcode_to_html
+    self.signature_html = self.signature.bbcode_to_html if self.signature
   end
 
 end

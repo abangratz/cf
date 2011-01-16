@@ -18,6 +18,7 @@ class User
 
   before :valid? do 
     self.role = Role.first(:name => "Guest") if self.role.nil?
+    self.profile = Profile.create if self.profile.nil?
   end
 
   def can_read(forum)

@@ -30,6 +30,7 @@ class TopicsController < ApplicationController
   def edit
     @topic = Topic.get(params[:id])
     redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+    redirect_to @topic, :notice => "Topic locked!" if @topic.locked
   end
 
   # POST /topics
@@ -73,11 +74,68 @@ class TopicsController < ApplicationController
   # DELETE /topics/1.xml
   def destroy
     @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to(topics_url) }
+      format.html { redirect_to([@topic.forum.forum_group, @topic.forum]) }
       format.xml  { head :ok }
+    end
+  end
+
+  def sticky
+    @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+    respond_to do |format|
+      if @topic.update(:sticky => true)
+        format.html { redirect_to(@topic, :notice => 'Topic was successfully stickied.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def unsticky
+    @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+    respond_to do |format|
+      if @topic.update(:sticky => false)
+        format.html { redirect_to(@topic, :notice => 'Topic was successfully unstickied.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def lock
+    @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+    respond_to do |format|
+      if @topic.update(:locked => true)
+        format.html { redirect_to(@topic, :notice => 'Topic was successfully locked.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def unlock
+    @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+    respond_to do |format|
+      if @topic.update(:locked => false)
+        format.html { redirect_to(@topic, :notice => 'Topic was successfully unlocked.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @topic.errors, :status => :unprocessable_entity }
+      end
     end
   end
 end

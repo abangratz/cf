@@ -7,8 +7,11 @@ class Topic
   property :title, String
   property :body, Text
   property :body_html, Text
+  property :locked, Boolean, :default => false
+  property :sticky, Boolean, :default => false
   property :created_at, DateTime
   property :updated_at, DateTime
+  property :deleted_at, ParanoidDateTime
 
   belongs_to :forum
   belongs_to :author, :model => User

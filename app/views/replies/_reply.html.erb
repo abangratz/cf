@@ -3,7 +3,7 @@
   <div class="content">
     <div class="header">
       <h2><%= reply.title %></h2>
-      <div class="navigation"><%= link_to("Edit", edit_topic_reply_url(@topic, reply), :class => "navbutton") if reply.author == current_user %></div>
+      <div class="navigation"><%= link_to("Edit", edit_topic_reply_url(@topic, reply), :class => "navbutton") if reply.author == current_user && !reply.topic.locked %></div>
     </div>
     <div class="body"><%= raw reply.body_html %></div>
     <div class="clear signature"><%= raw reply.author.profile.signature_html %></div>
