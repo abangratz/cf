@@ -5,10 +5,10 @@
   <div id="breadcrumbs" class="sequential">
     <%= link_to @topic.forum.forum_group.name, forum_groups_url %> &gt; <%= @topic.forum.name %> 
   </div>
-  <div><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" %></div>
+  <div><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" if current_user.can_write(@topic.forum) %></div>
   <div id="postings">
     <%= render @topic %>
     <%= render @topic.replies %>
   </div>
-  <div class="clear"><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" %></div>
+  <div class="clear"><%= link_to "Reply", new_topic_reply_url(@topic), :class => "navbutton" if current_user.can_write(@topic.forum) %></div>
 </div>

@@ -16,4 +16,28 @@ class User
   has n, :replies, :child_key => [ :author_id ]
   has 1, :profile
 
+  def can_read(forum)
+    self.roles.each do |role|
+      forum_role = ForumRole.first(:forum_id => forum.id, :role_id => role.id)
+      return true if forum_role.read
+    end
+    false
+  end
+
+  def can_write(forum)
+    self.roles.each do |role|
+      forum_role = ForumRole.first(:forum_id => forum.id, :role_id => role.id)
+      return true if forum_role.write
+    end
+    false
+  end
+
+  def forum_groups
+    groups = ForumGroup.all
+    groups.map do |group|
+      forums = group.forums.select { |forum| self.can_read(forum) }
+      forums.count > 0 ? group : nil
+    end.compact
+  end
+
 end

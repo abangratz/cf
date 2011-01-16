@@ -26,6 +26,7 @@ class RepliesController < ApplicationController
   # GET /replies/new.xml
   def new
     @topic = Topic.get(params[:topic_id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
     @reply = @topic.replies.new
 
     respond_to do |format|
@@ -37,6 +38,7 @@ class RepliesController < ApplicationController
   # GET /replies/1/edit
   def edit
     @topic = Topic.get(params[:topic_id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
     @reply = Reply.get(params[:id])
   end
 
@@ -44,6 +46,7 @@ class RepliesController < ApplicationController
   # POST /replies.xml
   def create
     @topic = Topic.get(params[:topic_id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
     @reply = @topic.replies.new(params[:reply])
     @reply.author = current_user
 
@@ -62,6 +65,7 @@ class RepliesController < ApplicationController
   # PUT /replies/1.xml
   def update
     @topic = Topic.get(params[:topic_id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
     @reply = Reply.get(params[:id])
 
     respond_to do |format|

@@ -15,6 +15,17 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <fieldset>
+    <legend>Permissions</legend>
+    <% @forum.forum_roles.each do |permission| %>
+      <ul>
+        <li>
+        <%= permission.role.name %> <%= check_box_tag "permission[#{permission.role_id}][read]", 'yes', permission.read %> read 
+        <%= check_box_tag "permission[#{permission.role_id}][write]", 'yes', permission.write %> write 
+        </li>
+      </ul>
+    <% end -%>
+  </fieldset>
   <div class="actions">
     <%= f.submit %>
   </div>

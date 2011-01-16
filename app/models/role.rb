@@ -6,6 +6,8 @@ class Role
 
   property :name, String
 
+  has n, :forum_roles
   has n, :users, :through => Resource
+  has n, :forums, :through => :permissions
 
 end

@@ -1,16 +1,5 @@
 class TopicsController < ApplicationController
   before_filter :authenticate_user!
-  # GET /topics
-  # GET /topics.xml
-  def index
-    @topics = Topic.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @topics }
-    end
-  end
-
   # GET /topics/1
   # GET /topics/1.xml
   def show
@@ -30,7 +19,9 @@ class TopicsController < ApplicationController
     @topic = @forum.topics.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html {
+        redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
+      }
       format.xml  { render :xml => @topic }
     end
   end
@@ -38,6 +29,7 @@ class TopicsController < ApplicationController
   # GET /topics/1/edit
   def edit
     @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
   end
 
   # POST /topics
@@ -45,6 +37,7 @@ class TopicsController < ApplicationController
   def create
     @forum_group = ForumGroup.get(params[:forum_group_id])
     @forum= Forum.get(params[:forum_id])
+    redirect_to [@forum_group, @forum], :notice => "Not allowed!" unless current_user.can_write(@forum)
     @topic = @forum.topics.new(params[:topic])
     @topic.author = current_user
 
@@ -63,6 +56,7 @@ class TopicsController < ApplicationController
   # PUT /topics/1.xml
   def update
     @topic = Topic.get(params[:id])
+    redirect_to [@topic.forum.forum_group, @topic.forum], :notice => "Not allowed!" unless current_user.can_write(@topic.forum)
 
     respond_to do |format|
       if @topic.update(params[:topic])

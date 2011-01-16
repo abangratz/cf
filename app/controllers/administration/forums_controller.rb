@@ -38,6 +38,14 @@ class Administration::ForumsController < AdministrationController
   def edit
     @forum = Forum.get(params[:id])
     @forum_group = @forum.forum_group
+    @roles = Role.all
+    if (@roles.count != @forum.roles.count) 
+      @roles.each do |role|
+        next if role.in?(@forum.roles)
+        @forum.roles << role
+      end
+    end
+    @forum.save
   end
 
   # POST /forums
@@ -45,11 +53,17 @@ class Administration::ForumsController < AdministrationController
   def create
     @forum_group = ForumGroup.get(params[:forum_group_id])
     @forum = @forum_group.forums.new(params[:forum])
-    logger.debug("Forum")
-    logger.debug(@forum.to_yaml)
 
     respond_to do |format|
       if @forum.save
+        permissions = params[:permission]
+        @forum.forum_roles.each do |forum_role|
+          if permissions[forum_role.role_id.to_s]
+            forum_role.read = permissions[forum_role.role_id.to_s][:read] == 'yes'
+            forum_role.write = permissions[forum_role.role_id.to_s][:write] == 'yes'
+            forum_role.save
+          end
+        end
         format.html { redirect_to([:administration, @forum_group, @forum], :notice => 'Forum was successfully created.') }
         format.xml  { render :xml => @forum, :status => :created, :location => @forum }
       else
@@ -65,7 +79,15 @@ class Administration::ForumsController < AdministrationController
     @forum = Forum.get(params[:id])
 
     respond_to do |format|
-      if @forum.update(params[:forum])
+      if @forum.update(params[:forum]) 
+        permissions = params[:permission]
+        @forum.forum_roles.each do |forum_role|
+          if permissions[forum_role.role_id.to_s]
+            forum_role.read = permissions[forum_role.role_id.to_s][:read] == 'yes'
+            forum_role.write = permissions[forum_role.role_id.to_s][:write] == 'yes'
+            forum_role.save
+          end
+        end
         format.html { redirect_to([:administration, @forum.forum_group, @forum], :notice => 'Forum was successfully updated.') }
         format.xml  { head :ok }
       else
