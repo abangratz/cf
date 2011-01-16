@@ -9,7 +9,7 @@ class Forum
   belongs_to :forum_group
 
   has n, :forum_roles
-  has n, :topics, :order => [:sticky.desc, :created_at.desc]
+  has n, :topics, :order => [:sticky.desc, :last_reply_at.desc]
   has n, :roles, :through => Resource
 
   is :list, :scope => :forum_group_id

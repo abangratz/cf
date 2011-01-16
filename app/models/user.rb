@@ -15,6 +15,8 @@ class User
   has n, :topics, :child_key => [ :author_id ]
   has n, :replies, :child_key => [ :author_id ]
   has 1, :profile
+  has n, :marked_topics
+  has n, :marked_forums
 
   before :valid? do 
     self.role = Role.first(:name => "Guest") if self.role.nil?

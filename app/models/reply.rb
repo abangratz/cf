@@ -20,4 +20,9 @@ class Reply
       self.body_html = self.body.bbcode_to_html
     end
   end
+
+  after :save do
+    self.topic.last_reply_at = self.updated_at
+    self.topic.save
+  end
 end

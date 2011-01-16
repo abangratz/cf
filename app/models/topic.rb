@@ -9,6 +9,7 @@ class Topic
   property :body_html, Text
   property :locked, Boolean, :default => false
   property :sticky, Boolean, :default => false
+  property :last_reply_at, DateTime
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
@@ -24,6 +25,9 @@ class Topic
     if self.body
       self.body.strip!
       self.body_html = self.body.bbcode_to_html
+    end
+    if self.last_reply_at.nil?
+      self.last_reply_at = Time.now
     end
   end
 

@@ -1,7 +1,7 @@
 div#main {
   top: 20px;
   margin: auto;
-  width: 765px;
+  width: 850px;
 }
 
 div.sequential {
@@ -13,7 +13,7 @@ div.clear {
 }
 
 div#banner {
-  height: 190px;
+  height: 210px;
 }
 
 div#mainmenu {
