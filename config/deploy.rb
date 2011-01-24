@@ -1,6 +1,6 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, 'ruby-1.9.2-p0'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, 'ruby-1.9.2-p136@cf'        # Or whatever env you want it to run in.
 set :application, "cf"
 set :repository,  "gitosis@sensor.twincode.net:cf.git"
 set :deploy_to, "/var/www/blood-covenant.eu/#{application}"
