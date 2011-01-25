@@ -17,6 +17,7 @@ class Topic
   belongs_to :forum
   belongs_to :author, :model => User
   has n, :replies
+  has n, :marked_topics
 
   validates_length_of :body, :minimum => 10
   validates_length_of :title, :minimum => 3
@@ -29,6 +30,11 @@ class Topic
     if self.last_reply_at.nil?
       self.last_reply_at = Time.now
     end
+  end
+
+  after :save do
+    self.forum.last_activity_at = self.last_reply_at
+    self.forum.save
   end
 
 end

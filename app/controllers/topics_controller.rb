@@ -5,6 +5,10 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.get(params[:id])
 
+    marked_topic = MarkedTopic.first_or_create({:topic_id => @topic.id, :user_id => current_user.id})
+    marked_topic.last_read = Time.now
+    marked_topic.save
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @topic }

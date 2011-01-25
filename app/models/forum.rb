@@ -5,6 +5,8 @@ class Forum
   property :id, Serial
 
   property :name, String
+  property :last_activity_at, DateTime
+  property :deleted_at, ParanoidDateTime
 
   belongs_to :forum_group
 

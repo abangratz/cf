@@ -8,9 +8,10 @@
   <div id="postings">
     <% @forum.topics.each do |topic| %>
       <div class="topic">
-        <h2><%= "Locked: " if topic.locked %><%= "Sticky: " if topic.sticky %><%= link_to topic.title, topic %></h2>
-        <div></div>
-        <div class="author"> created by <%= topic.author.nickname %> at <%= l topic.created_at, :format => :short %>, last post: <%= l topic.last_reply_at, :format => :short %></div>
+        <h2><%= "Locked: " if topic.locked %><%= "Sticky: " if topic.sticky %><%= link_to topic.title, topic %><%=" (has unread replies)" if current_user.topic_unread? topic %></h2>
+        <div class="author"> created by <%= topic.author.nickname %> at <%= l topic.created_at, :format => :short %>, last post: <%= l topic.last_reply_at, :format => :short %>
+          <div class="right">Replies: <%= topic.replies.count %></div>
+        </div>
       </div>
     <% end -%>
   </div>

@@ -43,4 +43,14 @@ class User
     end.compact
   end
 
+  def topic_unread?(topic)
+    marked = self.marked_topics.first(:topic => topic)
+    marked.nil? || topic.last_reply_at > marked.last_read
+  end
+
+  def forum_unread?(forum)
+    marked = self.marked_forums.first(:forum => forum)
+    marked.nil? || forum.last_activity_at > marked.last_read_at
+  end
+
 end

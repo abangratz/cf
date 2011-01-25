@@ -12,6 +12,9 @@ div.clear {
 	clear: both;
 }
 
+div.left { float: left; }
+div.right { float: right; }
+
 div#banner {
   height: 210px;
 }

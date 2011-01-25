@@ -43,5 +43,7 @@ module Cf
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.action_controller.default_charset = 'utf-8'
   end
 end

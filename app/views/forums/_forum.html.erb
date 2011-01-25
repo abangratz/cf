@@ -1,3 +1,8 @@
-<p>
-  <%= link_to forum.name, [forum.forum_group, forum]  if current_user.can_read(forum)%>
-</p>
+<div>
+  <div class="left">
+    <%= link_to forum.name, [forum.forum_group, forum]  if current_user.can_read(forum)%>
+  </div>
+  <div class="right">
+    Topics: <%= forum.topics.count %> <%= "(unread)" if current_user.forum_unread? forum %>
+  </div>
+</div>
