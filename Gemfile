@@ -28,6 +28,7 @@ gem 'dm-paperclip', :git => 'git://github.com/abangratz/dm-paperclip.git'
 gem 'will_paginate', '~> 3.0.pre2'
 
 gem 'bb-ruby'
+gem 'andand'
 
 
 # Bundle gems for the local environment. Make sure to
