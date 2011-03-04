@@ -9,7 +9,7 @@
     <% @forum.topics.each do |topic| %>
       <div class="topic">
         <h2><%= "Locked: " if topic.locked %><%= "Sticky: " if topic.sticky %><%= link_to topic.title, topic %><%=" (has unread replies)" if current_user.topic_unread? topic %></h2>
-        <div class="author"> created by <%= topic.author.nickname %> at <%= l topic.created_at, :format => :short %>, last post: <%= l topic.last_reply_at, :format => :short %> by <%= topic.replies.last.andand.author.nickname %>
+        <div class="author"> created by <%= topic.author.nickname %> at <%= l topic.created_at, :format => :short %>, last post: <%= l topic.last_reply_at, :format => :short %> by <%= topic.replies.empty? ? topic.author.nickname : topic.replies.last.author.nickname %>
           <div class="right">Replies: <%= topic.replies.count %></div>
         </div>
       </div>
