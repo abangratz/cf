@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.get params[:id]
     @characters = @profile.characters
     if @profile.public_alts? || @profile == current_user.profile
-      @characters += @profile.characters.first.alts
+      @characters += @profile.characters.first.alts unless @profile.characters.empty?
     end
 
 
