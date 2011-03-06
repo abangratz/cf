@@ -5,6 +5,7 @@ class Role
   property :id, Serial
 
   property :name, String
+  property :member, Boolean, :default => false
 
   has n, :forum_roles
   has n, :users

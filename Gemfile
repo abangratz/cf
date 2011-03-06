@@ -10,6 +10,10 @@ gem 'capistrano'
 gem 'bluecloth'
 gem 'RedCloth'
 gem 'nokogiri'
+gem 'haml'
+gem 'haml-rails'
+gem 'hpricot'
+gem 'ruby_parser'
 
 gem 'pg'
 

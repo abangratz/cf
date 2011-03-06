@@ -53,4 +53,8 @@ class User
     marked.nil? || forum.last_activity_at > marked.last_read_at
   end
 
+  def member?
+    self.role.member?
+  end
+
 end

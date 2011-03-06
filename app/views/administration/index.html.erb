@@ -5,3 +5,9 @@
   <li><%= link_to "User Administration", administration_users_path%></li>
   <li><%= link_to "Content Administration", administration_pages_path%></li>
 </ul>
+<div><h2>Upload Guild XML</h2>
+  <%= form_tag administration_upload_guild_xml_path, :multipart => true  do %>
+    <%= label_tag :xml, "File" %>: <%= file_field_tag :xml %><br />
+    <%= submit_tag "Do it!"%>
+  <% end -%>
+</div>

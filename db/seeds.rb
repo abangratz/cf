@@ -7,7 +7,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 %w(Officer Member Initiate Recruit Guest).each do |name|
-  Role.first_or_create(:name => name)
+  Role.first_or_create(:name => name, :member => name != 'Guest')
 end
 
 testy = User.first_or_create({:email => 'test@twincode.net'}, {:password => 'testing', :password_confirmation => 'testing', :nickname => 'Testy'})

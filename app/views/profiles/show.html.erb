@@ -12,4 +12,4 @@
 </p>
 
 
-<%= link_to 'Edit', edit_profile_path, :class => "button" %> 
+<%= link_to 'Edit', edit_profile_path, :class => "button" unless @profile != current_user.profile %> 

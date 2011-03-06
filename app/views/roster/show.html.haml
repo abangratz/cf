@@ -1,0 +1,15 @@
+%h1 Critical Failure Roster
+%table#rostertable.tablesorter
+  %thead
+    %tr
+      %th Name
+      %th Rank
+      %th Calling
+      %th Level
+  %tbody
+    - @characters.each do |char|
+      %tr
+        %td= char.name
+        %td= char.rank.name
+        %td= char.calling
+        %td= char.level

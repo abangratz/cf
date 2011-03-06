@@ -1,6 +1,6 @@
 Cf::Application.routes.draw do
 
-  resource :profile, :except => [:destroy]
+  resources :profiles, :except => [:destroy]
 
   resources :pages, :only => [:index, :show]
 
@@ -24,6 +24,8 @@ Cf::Application.routes.draw do
   devise_for :users
 
   get "administration" => 'administration#index'
+  get 'roster' => 'roster#show'
+  post "administration/upload_guild_xml"
 
   resources :articles, :only => [:index, :show]
 

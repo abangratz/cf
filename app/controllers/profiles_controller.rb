@@ -3,7 +3,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.xml
   def show
-    @profile = current_user.profile
+    @profile = Profile.get params[:id]
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -14,12 +15,16 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   # GET /profiles/new.xml
   def new
-    @profile = Profile.new
-    @profile.user = current_user
+    if current_user.profile
+      redirect_to(current_user.profile, :notice => 'Profile already exists') 
+    else
+      @profile = Profile.new
+      @profile.user = current_user
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @profile }
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @profile }
+      end
     end
   end
 
@@ -31,12 +36,13 @@ class ProfilesController < ApplicationController
   # POST /profiles
   # POST /profiles.xml
   def create
+    redirect_to(current_user.profile, :notice => 'Profile already exists') if current_user.profile
     @profile = Profile.new(params[:profile])
     @profile.user = current_user
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to(profile_url, :notice => 'Profile was successfully created.') }
+        format.html { redirect_to(@profile, :notice => 'Profile was successfully created.') }
         format.xml  { render :xml => @profile, :status => :created, :location => @profile }
       else
         format.html { render :action => "new" }

@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title
+      Critical Failure: #{@title}
+    = stylesheet_link_tag 'layout'
+    = stylesheet_link_tag 'style'
+    = stylesheet_link_tag 'dark-hive/jquery-ui-1.8.7.custom.css'
+    = javascript_include_tag :defaults
+    = javascript_include_tag 'jquery.markitup.js'
+    = javascript_include_tag 'jquery.tablesorter.min.js'
+    = javascript_include_tag 'markitup/set.js'
+    = stylesheet_link_tag 'markitup/skins/markitup/style.css'
+    = stylesheet_link_tag 'markitup/sets/bbcode/style.css'
+    = csrf_meta_tag
+    = yield :head
+  %body
+    #main
+      #banner.sequential= link_to(image_tag('banner.jpg'), root_url)
+      #mainmenu.menu.sequential
+        %ul
+          %li= link_to "home", root_url
+          %li= link_to "forum", forum_groups_url
+          - if user_signed_in?
+            %li= link_to "profile", current_user.profile ? profile_url(current_user.profile) : new_profile_url
+            %li= link_to "logout", destroy_user_session_url
+          - else
+            %li= link_to "join", new_user_registration_url
+            %li= link_to "login", new_user_session_url
+      .clear
+      = render :partial => 'pages/pages_menu'
+      #notice= notice
+      = yield
