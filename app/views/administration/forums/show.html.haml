@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @forum.name
+= link_to 'Edit', edit_administration_forum_group_forum_path(@forum.forum_group, @forum)
+|
+\#{link_to 'Back', administration_forum_group_forums_path(@forum.forum_group)}

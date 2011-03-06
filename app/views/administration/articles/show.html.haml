@@ -1,0 +1,18 @@
+%p#notice= notice
+%p
+  %b Title:
+  = @article.title
+%p
+  %b Body html:
+  %hr/
+  = raw @article.body_html
+  %hr/
+%p
+  %b Conversion:
+  = @article.conversion
+%p
+  %b Slug:
+  = link_to(@article.slug, @article)
+= link_to 'Edit', edit_administration_article_path(@article)
+|
+\#{link_to 'Back', administration_articles_path}

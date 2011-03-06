@@ -1,0 +1,4 @@
+#pagemenu.menu.sequential
+  %ul#pagemenu
+    - @menu_pages.each do |page|
+      %li= link_to page.title, page

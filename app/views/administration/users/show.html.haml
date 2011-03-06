@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  = label_tag :email
+  \:
+  %br/
+  = @user.email
+%p
+  = label_tag :nickname
+  \:
+  %br/
+  = @user.nickname
+%p
+  = label_tag :role
+  \:
+  %br/
+  = @user.role.name
+= link_to 'Edit', edit_administration_user_path(@user)
+|
+\#{link_to 'Back', administration_users_path}

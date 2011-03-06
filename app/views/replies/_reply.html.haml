@@ -1,0 +1,12 @@
+.posting
+  .author
+    Author:#{reply.author.nickname} #{image_tag reply.author.profile.avatar.url}
+    .timestamp
+      at #{l reply.created_at, :format => :short}
+  .content
+    .header
+      %h2= reply.title
+      .navigation= link_to("Edit", edit_topic_reply_url(@topic, reply), :class => "navbutton") if reply.author == current_user && !reply.topic.locked
+    .body= raw reply.body_html
+    .clear.signature= raw reply.author.profile.signature_html
+  .footer &nbsp;

@@ -1,0 +1,20 @@
+%h1 Listing articles
+%table
+  %tr
+    %th Title
+    %th Body
+    %th Body html
+    %th Conversion
+    %th Slug
+    %th
+    %th
+    %th
+  - @articles.each do |article|
+    %tr
+      %td= article.title
+      %td= article.slug
+      %td= link_to 'Show', administration_article_path(article)
+      %td= link_to 'Edit', edit_administration_article_path(article)
+      %td= link_to 'Destroy', administration_article_path(article), :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Article', new_administration_article_path

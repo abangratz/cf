@@ -1,0 +1,13 @@
+%h1 Listing administration_profileses
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @administration_profileses.each do |administration_profile|
+    %tr
+      %td= link_to 'Show', administration_profile
+      %td= link_to 'Edit', edit_administration_profile_path(administration_profile)
+      %td= link_to 'Destroy', administration_profile, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Profile', new_administration_profile_path

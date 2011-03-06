@@ -1,0 +1,25 @@
+= form_for([@reply.topic, @reply]) do |f|
+  - if @reply.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@reply.errors.count, "error")
+        prohibited this reply from being saved:
+      %ul
+        - @reply.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :title
+    %br/
+    = f.text_field :title
+  .field
+    = f.label :body
+    %br/
+    = f.text_area :body, :rows => 25, :cols => 90
+  .actions
+    = f.submit
+- content_for :head do
+  :javascript
+    $(document).ready(function() {
+        $('#reply_body').markItUp(mySettings);
+        });
+  

@@ -1,0 +1,6 @@
+- content_for :head do
+  = javascript_include_tag 'forums'
+#content
+  %h1 Editing reply
+  = render 'form'
+  = link_to 'Back', topic_path(@reply.topic)

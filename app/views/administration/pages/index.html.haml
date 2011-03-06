@@ -1,0 +1,17 @@
+%h1 Listing pages
+- content_for :head do
+  = javascript_include_tag 'forums.js'
+%table#drag-list{"data-prioritize-url" => prioritize_administration_pages_path}
+  %tr.header
+    %th Title
+    %th
+    %th
+    %th
+  - @pages.each do |page|
+    %tr{:id => "pages_order_#{page.id}"}
+      %td= page.title
+      %td= link_to 'Show', [:administration, page]
+      %td= link_to 'Edit', edit_administration_page_path(page)
+      %td= link_to 'Destroy', [:administration, page], :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Page', new_administration_page_path

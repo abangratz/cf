@@ -1,0 +1,13 @@
+%h1 Listing replies
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @replies.each do |reply|
+    %tr
+      %td= link_to 'Show', reply
+      %td= link_to 'Edit', edit_reply_path(reply)
+      %td= link_to 'Destroy', reply, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Reply', new_reply_path

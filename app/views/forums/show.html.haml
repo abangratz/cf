@@ -1,0 +1,19 @@
+- content_for :head do
+  = javascript_include_tag 'forums'
+#breadcrumbs.sequential
+  = link_to @forum.forum_group.name, forum_groups_url
+  \&gt; #{@forum.name}
+#content.sequential
+  = link_to "New Topic", new_forum_group_forum_topic_url(@forum.forum_group, @forum), :class => "navbutton" if current_user.can_write(@forum)
+  #postings
+    - @forum.topics.each do |topic|
+      .topic
+        %h2
+          = "Locked: " if topic.locked
+          = "Sticky: " if topic.sticky
+          = link_to topic.title, topic
+          = " (has unread replies)" if current_user.topic_unread? topic
+        .author
+          created by #{topic.author.nickname} at #{l topic.created_at, :format => :short}, last post: #{l topic.last_reply_at, :format => :short} by #{topic.replies.empty? ? topic.author.nickname : topic.replies.last.author.nickname}
+          .right
+            Replies: #{topic.replies.count}

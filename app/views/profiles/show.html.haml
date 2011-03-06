@@ -1,0 +1,8 @@
+%h1 Profile
+%p
+  = image_tag @profile.avatar.url
+%p
+  %b Signature:
+  .sigdisplay
+    = raw @profile.signature_html
+= link_to 'Edit', edit_profile_path, :class => "button" unless @profile != current_user.profile

@@ -1,0 +1,6 @@
+#content.sequential
+  %h1 Critical Failure - Forum
+  - @forum_groups.each do |forum_group|
+    %fieldset
+      %legend= forum_group.name
+      = render forum_group.forums

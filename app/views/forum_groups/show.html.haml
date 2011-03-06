@@ -1,0 +1,6 @@
+%p
+  %b Name:
+  = @forum_group.name
+= link_to 'Edit', edit_forum_group_path(@forum_group)
+|
+\#{link_to 'Back', forum_groups_path}

@@ -1,0 +1,20 @@
+= form_for(@profile, :url => profile_url, :html => {:multipart => true }) do |f|
+  - if @profile.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@profile.errors.count, "error")
+        prohibited this profile from being saved:
+      %ul
+        - @profile.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :signature
+    %br/
+    = f.text_area :signature
+  .field
+    = f.label :avatar
+    %br/
+    = image_tag @profile.avatar.url
+    = f.file_field :avatar
+  .actions
+    = f.submit :class => 'button'

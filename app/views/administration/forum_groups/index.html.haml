@@ -1,0 +1,17 @@
+%h1 Listing forum_groups
+- content_for :head do
+  = javascript_include_tag 'forums.js'
+%table#drag-list{"data-prioritize-url" => prioritize_administration_pages_path}
+  %tr.header
+    %th Name
+    %th
+    %th
+    %th
+  - @forum_groups.each do |forum_group|
+    %tr{:id => "forum_group_order_#{forum_group.id}"}
+      %td= forum_group.name
+      %td= link_to 'Show', administration_forum_group_forums_path(forum_group)
+      %td= link_to 'Edit', edit_administration_forum_group_path(forum_group)
+      %td= link_to 'Destroy', [:administration, forum_group], :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Forum group', new_administration_forum_group_path
