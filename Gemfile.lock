@@ -150,6 +150,7 @@ GEM
     net-ssh (2.0.23)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
+    nokogiri (1.4.4)
     pg (0.10.0)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -210,6 +211,7 @@ DEPENDENCIES
   dm-types (~> 1.0.2)
   dm-validations (~> 1.0.2)
   jquery-rails
+  nokogiri
   pg
   rails (= 3.0.3)
   unicorn

@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  rank: 1
+  level: 1
+  calling: MyString
+  joined: 2011-03-06 11:36:12
+  lastlogouttime: 2011-03-06 11:36:12
+  personalnote: MyString
+  officernote: MyString
+  guildxp: 1
+  profile: 
+  rank: 
+
+two:
+  name: MyString
+  rank: 1
+  level: 1
+  calling: MyString
+  joined: 2011-03-06 11:36:12
+  lastlogouttime: 2011-03-06 11:36:12
+  personalnote: MyString
+  officernote: MyString
+  guildxp: 1
+  profile: 
+  rank: 

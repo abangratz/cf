@@ -9,6 +9,7 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'bluecloth'
 gem 'RedCloth'
+gem 'nokogiri'
 
 gem 'pg'
 

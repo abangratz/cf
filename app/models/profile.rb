@@ -9,11 +9,14 @@ class Profile
 
   property :signature, Text
   property :signature_html, Text
+  property :public, Boolean, :default => false
+  property :public_alts, Boolean, :default => false
 
   property :created_at, DateTime
   property :updated_at, DateTime
 
   belongs_to :user
+  has n, :characters
 
   has_attached_file :avatar, :styles => {:original => '65x65>'}, :default_url => '/images/avatar/cf.png'
 
