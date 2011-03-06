@@ -9,7 +9,10 @@
   %tbody
     - @characters.each do |char|
       %tr
-        %td= char.name
+        - if char.profile && (char.profile.public? || current_user.andand.member?)
+          %td= link_to char.name, char.profile
+        - else
+          %td= char.name
         %td= char.rank.name
         %td= char.calling
         %td= char.level

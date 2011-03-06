@@ -1,14 +1,23 @@
 class ProfilesController < ApplicationController
- before_filter :authenticate_user! 
+ before_filter :authenticate_user!, :except => :show
   # GET /profiles/1
   # GET /profiles/1.xml
   def show
     @profile = Profile.get params[:id]
+    @characters = @profile.characters
+    if @profile.public_alts? || @profile == current_user.profile
+      @characters += @profile.characters.first.alts
+    end
 
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @profile }
+      if (@profile.public? || current_user.andand.member?)
+        format.html # show.html.erb
+        format.xml  { render :xml => @profile }
+      else
+        format.html {redirect_to(root_url, :notice => "Sorry, this profile is private")}
+        format.xml  { head :bad_request}
+      end
     end
   end
 

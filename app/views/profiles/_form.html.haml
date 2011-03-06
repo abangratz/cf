@@ -12,6 +12,12 @@
     %br/
     = f.text_area :signature
   .field
+    = f.check_box :public
+    = f.label :public, "Profile can be viewed by guests?"
+  .field
+    = f.check_box :public_alts
+    = f.label :public_alts, "Others can see my alts?"
+  .field
     = f.label :avatar
     %br/
     = image_tag @profile.avatar.url
