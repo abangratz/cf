@@ -2,12 +2,12 @@
 %table#rostertable.tablesorter
   %tr
     %th Nickname
-    %th rank
+    %th Role
     %th{:colspan => 2} Action
   - @users.each do |user|
     %tr
       %td= link_to user.nickname, [:administration, user]
-      %td= user.rank.name
+      %td= user.role.name
       %td= link_to 'Edit', edit_administration_user_path(user)
       %td= link_to 'Destroy', [:administration, user], :confirm => 'Are you sure?', :method => :delete
 %h2 Role Statistics
