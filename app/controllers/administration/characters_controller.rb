@@ -1,10 +1,15 @@
 class Administration::CharactersController < AdministrationController
+  before_filter :load_associations
+  def load_associations
+    @ranks = Rank.all
+    @mains = Character.all(:rank => {:id.not => Character::ALT_RANK_IDS})
+    @alts = Character.all(:rank => {:id => Character::ALT_RANK_IDS})
+    @profiles = Profile.all
+  end
   # GET /administration/characters
   # GET /administration/characters.xml
   def index
     @characters = Character.all
-    @ranks = Rank.all
-    @alts = Character.all(:rank => {:id => Character::ALT_RANK_IDS})
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +21,6 @@ class Administration::CharactersController < AdministrationController
   # GET /administration/characters/1.xml
   def show
     @character = Character.get(params[:id])
-    @mains = 
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,20 +42,16 @@ class Administration::CharactersController < AdministrationController
   # GET /administration/characters/1/edit
   def edit
     @character = Character.get(params[:id])
-    @ranks = Rank.all
-    @mains = Character.all(:rank => {:id.not => Character::ALT_RANK_IDS})
-    @alts = Character.all(:rank => {:id => Character::ALT_RANK_IDS})
-    @profiles = Profile.all.select { |x| x.characters.empty? }
   end
 
   # POST /administration/characters
   # POST /administration/characters.xml
   def create
-    @character = Character.new(params[:administration_character])
+    @character = Character.new(params[:character])
 
     respond_to do |format|
       if @character.save
-        format.html { redirect_to(@character, :notice => 'Character was successfully created.') }
+        format.html { redirect_to([:administration, @character], :notice => 'Character was successfully created.') }
         format.xml  { render :xml => @character, :status => :created, :location => @character }
       else
         format.html { render :action => "new" }
@@ -63,11 +63,12 @@ class Administration::CharactersController < AdministrationController
   # PUT /administration/characters/1
   # PUT /administration/characters/1.xml
   def update
-    @character = Character.find(params[:id])
+    @character = Character.get(params[:id])
+    params[:character] = params[:character].map { |x,y| [x, y.empty? ? nil : y ] }.to_hash
 
     respond_to do |format|
-      if @character.update_attributes(params[:administration_character])
-        format.html { redirect_to(@character, :notice => 'Character was successfully updated.') }
+      if @character.update_attributes(params[:character])
+        format.html { redirect_to([:administration, @character], :notice => 'Character was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -79,7 +80,7 @@ class Administration::CharactersController < AdministrationController
   # DELETE /administration/characters/1
   # DELETE /administration/characters/1.xml
   def destroy
-    @character = Character.find(params[:id])
+    @character = Character.get(params[:id])
     @character.destroy
 
     respond_to do |format|
