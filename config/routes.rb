@@ -32,6 +32,7 @@ Cf::Application.routes.draw do
   devise_for :admins
 
   namespace :administration do
+    resources :characters
     resources :users
     resources :articles
     resources :pages do

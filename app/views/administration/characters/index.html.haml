@@ -1,0 +1,37 @@
+%h1 Listing Characters
+
+%table#rostertable.tablesorter
+  %tr
+    %th Character
+    %th Rank
+    %th Calling
+    %th Level
+    %th User
+    %th Actions
+
+  - @characters.each do |character|
+    %tr
+      %td= link_to character.name, [:administration, character]
+      %td= character.rank.name
+      %td= character.calling
+      %td= character.level
+      %td= character.profile.user.nickname if character.profile
+      %td= link_to 'Destroy', [:administration, character], :confirm => 'Are you sure?', :method => :delete
+%h1 Rank Statistics
+%table
+  %tr
+    %th Rank
+    %th Characters
+  - @ranks.each do |rank|
+    %tr
+      %td= rank.name
+      %td= rank.characters.count
+  %tr
+    %td Sum Characters 
+    %td= @characters.count - @alts.count
+  %tr
+    %td Sum Alts 
+    %td= @alts.count
+%br/
+
+= link_to 'New Character', new_administration_character_path

@@ -1,6 +1,5 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_admin!
-  ALT_RANK_ID = 7
   def index
   end
   def upload_guild_xml
@@ -37,7 +36,7 @@ class AdministrationController < ApplicationController
           :profile => profile
         }
         logger.debug attributes
-        if rank.to_i == ALT_RANK_ID
+        if Character::ALT_RANK_IDS.include?(rank.to_i)
           alts << attributes
         else
           character = Character.first(:name => name) || Character.create

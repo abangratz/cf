@@ -1,0 +1,46 @@
+%p#notice= notice
+
+.field
+  %strong Name:
+  %br/
+  = @character.name
+.field
+  %strong Rank:
+  %br/
+  = @character.rank.name
+.field
+  %strong Calling:
+  %br/
+  = @character.calling
+.field
+  %strong Joined:
+  %br/
+  = @character.joined
+.field
+  %strong Personal Note:
+  %br/
+  = @character.personalnote
+.field
+  %strong Officer Note:
+  %br/
+  = @character.officernote
+.field
+  %strong Guild XP Contribution:
+  %br/
+  = @character.guildxp
+- if @character.main_name
+  .field
+    %strong Main:
+    %br/
+    = @character.main_name
+- if @character.profile
+  .field
+    %strong Profile
+    %br/
+    = @character.profile.nickname
+
+
+
+= link_to 'Edit', edit_administration_character_path(@character)
+\|
+= link_to 'Back', administration_characters_path

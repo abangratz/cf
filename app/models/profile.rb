@@ -24,4 +24,8 @@ class Profile
     self.signature_html = self.signature.bbcode_to_html if self.signature
   end
 
+  def nickname
+    self.user.andand.nickname
+  end
+
 end

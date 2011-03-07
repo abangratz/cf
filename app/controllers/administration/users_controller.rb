@@ -4,6 +4,7 @@ class Administration::UsersController < AdministrationController
   # GET /administration/users.xml
   def index
     @users = User.all
+    @roles = Role.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +27,7 @@ class Administration::UsersController < AdministrationController
   # GET /administration/users/new.xml
   def new
     @user = User.new
+    @roles = Role.all
 
     respond_to do |format|
       format.html # new.html.erb

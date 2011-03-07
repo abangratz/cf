@@ -1,0 +1,54 @@
+= form_for [:administration, @character] do |f|
+  -if @character.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@character.errors.count, "error")} prohibited this character from being saved:"
+      %ul
+        - @character.errors.full_messages.each do |msg|
+          %li= msg
+  #tabs
+    %ul
+      %li
+        %a{:href => "#general"} General
+      %li
+        %a{:href => "#notes"} Notes
+      %li
+        %a{:href => "#assoc"} Associations
+    #general
+      .field
+        = f.label :name
+        %br/
+        = f.text_field :name
+      .field
+        = f.label :level
+        %br/
+        = f.text_field :level
+      .field
+        = f.label :calling
+        %br/
+        = f.text_field :calling
+    #notes
+      .field{:style => "float: left;"}
+        = f.label :personalnote
+        %br/
+        = f.text_area :personalnote
+      .field
+        = f.label :officernote
+        %br/
+        = f.text_area :officernote
+      .clear
+    #assoc
+      .field
+        = f.label :rank_id, "Rank"
+        %br/
+        = f.collection_select :rank_id, @ranks, :id, :name
+      .field
+        = f.label :main_name, "Main"
+        %br/
+        = f.collection_select :main_name, @mains, :name, :name, {:include_blank => true}
+      .field
+        = f.label :profile_id, "Profile"
+        %br/
+        = f.collection_select :profile_id, @profiles, :id, :nickname, {:include_blank => true}
+
+  .actions
+    = f.submit 'Save'

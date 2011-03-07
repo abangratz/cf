@@ -1,0 +1,2 @@
+module Administration::CharactersHelper
+end
