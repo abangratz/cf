@@ -27,10 +27,12 @@
       %td= rank.name
       %td= rank.characters.count
   %tr
-    %td Sum Characters 
-    %td= @characters.count - @alts.count
+    %td 
+      %b Characters 
+    %td= @mains.count 
   %tr
-    %td Sum Alts 
+    %td 
+      %b Alts 
     %td= @alts.count
 %br/
 
