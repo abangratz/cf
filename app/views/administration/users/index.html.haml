@@ -1,15 +1,17 @@
 %h1 Listing users
 %table#rostertable.tablesorter
-  %tr
-    %th Nickname
-    %th Role
-    %th{:colspan => 2} Action
-  - @users.each do |user|
+  %thead
     %tr
-      %td= link_to user.nickname, [:administration, user]
-      %td= user.role.name
-      %td= link_to 'Edit', edit_administration_user_path(user)
-      %td= link_to 'Destroy', [:administration, user], :confirm => 'Are you sure?', :method => :delete
+      %th Nickname
+      %th Role
+      %th{:colspan => 2} Action
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= link_to user.nickname, [:administration, user]
+        %td= user.role.name
+        %td= link_to 'Edit', edit_administration_user_path(user)
+        %td= link_to 'Destroy', [:administration, user], :confirm => 'Are you sure?', :method => :delete
 %h2 Role Statistics
 %table 
   %tr
