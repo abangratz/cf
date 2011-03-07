@@ -7,7 +7,7 @@ class AdministrationController < ApplicationController
     xml = Nokogiri::XML.parse file
     Rank.transaction do
       xml.xpath('.//Ranks/Rank').each do |ranknode|
-        id = ranknode.xpath('.//Id').first.content.to_i
+        id = ranknode.xpath('.//Id').first.content.to_i+1
         rank = Rank.first(:id => id) || Rank.new
         rank.name = ranknode.xpath('.//Name').first.content
         rank.id = id
@@ -17,7 +17,7 @@ class AdministrationController < ApplicationController
     Character.transaction do
       alts = []
       xml.xpath('.//Members/Member').each do |membernode|
-        rank = membernode.xpath('.//Rank').first.content
+        rank = membernode.xpath('.//Rank').first.content.to_i + 1
         name = membernode.xpath('.//Name').first.content
         profile = Profile.first(:user => {:nickname.like => name})
         officernote = membernode.xpath('.//OfficerNotes').first.content
