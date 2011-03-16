@@ -30,5 +30,7 @@
             %li= link_to "login", new_user_session_url
       .clear
       = render :partial => 'pages/pages_menu'
-      #notice= notice
+      - if notice
+        #notice.ui-state-highlight
+          %span.ui-icon.ui-icon-info= notice
       = yield

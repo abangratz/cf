@@ -144,3 +144,8 @@ div#breadcrumbs {
 div.signature {
   padding: 5px 5px 8px 15px;
 }
+
+div#notice.ui-state-highlight span.ui-icon {
+  float: left;
+  padding-left: .3em;
+}

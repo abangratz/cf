@@ -1,4 +1,3 @@
-%p#notice= notice
 %p
   = label_tag :email
   \:
@@ -14,6 +13,8 @@
   \:
   %br/
   = @user.role.name
+%p
+  = @user.ex_member? ? "Ex-Member" : "No Ex-Member"
 = link_to 'Edit', edit_administration_user_path(@user)
 |
 \#{link_to 'Back', administration_users_path}

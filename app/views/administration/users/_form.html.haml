@@ -27,5 +27,8 @@
     = f.label :role_id, "Role"
     %br/
     = f.collection_select :role_id, @roles, :id, :name
+  .field
+    = f.check_box :ex_member
+    = f.label :ex_member
   .actions
     = f.submit

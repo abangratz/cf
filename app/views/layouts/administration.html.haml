@@ -16,4 +16,9 @@
     = yield :head
   %body
     = link_to "Administration", administration_url
-    = yield
+    - if notice
+      #notice.ui-state-highlight
+        %span.ui-icon.ui-icon-info
+        = notice
+    .content
+      = yield

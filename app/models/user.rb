@@ -10,6 +10,7 @@ class User
   property :id, Serial
 
   property :nickname, String, :required => true, :unique => true
+  property :ex_member, Boolean, :default => false
 
   belongs_to :role
   has n, :topics, :child_key => [ :author_id ]

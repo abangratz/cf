@@ -16,6 +16,8 @@ class AdministrationController < ApplicationController
     end
     Character.transaction do
       alts = []
+      existing_characters = Character.all
+      new_characters = []
       xml.xpath('.//Members/Member').each do |membernode|
         rank = membernode.xpath('.//Rank').first.content.to_i + 1
         name = membernode.xpath('.//Name').first.content
@@ -35,23 +37,26 @@ class AdministrationController < ApplicationController
           :main_name => main_name,
           :profile => profile
         }
-        logger.debug attributes
         if Character::ALT_RANK_IDS.include?(rank.to_i)
           alts << attributes
         else
           character = Character.first(:name => name) || Character.create
+          attributes.delete(:profile) if character.profile
           character.attributes = attributes
           character.save!
+          new_characters << character
         end
       end
       alts.each do |attributes|
         character = Character.first(:name => attributes[:name] ) || Character.new
+        attributes.delete(:profile) if character.profile
         character.attributes = attributes
         character.save!
-        logger.debug character.attributes
+        new_characters << character
       end
+      deletable_characters = existing_characters - new_characters
+      deletable_characters.map(&:destroy)
     end
-    render :text => xml.to_s
-    #redirect_to '/administration', :notice => "Done"
+    redirect_to '/administration', :notice => "Done"
   end
 end
