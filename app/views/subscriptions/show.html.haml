@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Primary role:
+  = @subscription.primary_role
+%p
+  %b Secondary role:
+  = @subscription.secondary_role
+%p
+  %b Tertiary role:
+  = @subscription.tertiary_role
+%p
+  %b Created at:
+  = @subscription.created_at
+%p
+  %b Updated at:
+  = @subscription.updated_at
+%p
+  %b Commitment:
+  = @subscription.commitment
+
+= link_to 'Edit', edit_subscription_path(@subscription)
+\|
+= link_to 'Back', subscriptionses_path

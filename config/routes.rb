@@ -1,5 +1,9 @@
 Cf::Application.routes.draw do
 
+  resources :subscriptions
+
+  resources :calendar_events
+
   resources :profiles, :except => [:destroy]
 
   resources :pages, :only => [:index, :show]

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  primary_role: MyString
+  secondary_role: MyString
+  tertiary_role: MyString
+  created_at: 2011-03-17 14:23:07
+  updated_at: 2011-03-17 14:23:07
+  commitment: MyString
+
+two:
+  primary_role: MyString
+  secondary_role: MyString
+  tertiary_role: MyString
+  created_at: 2011-03-17 14:23:07
+  updated_at: 2011-03-17 14:23:07
+  commitment: MyString

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @calendar_event.title
+%p
+  %b Location:
+  = @calendar_event.location
+%p
+  %b Start:
+  = @calendar_event.start
+%p
+  %b End:
+  = @calendar_event.end
+%p
+  %b Public:
+  = @calendar_event.public
+
+= link_to 'Edit', edit_calendar_event_path(@calendar_event)
+\|
+= link_to 'Back', calendar_eventses_path

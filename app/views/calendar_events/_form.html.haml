@@ -1,0 +1,25 @@
+= form_for @calendar_event do |f|
+  -if @calendar_event.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@calendar_event.errors.count, "error")} prohibited this calendar_event from being saved:"
+      %ul
+        - @calendar_event.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label :start
+    = f.datetime_select :start
+  .field
+    = f.label :end
+    = f.datetime_select :end
+  .field
+    = f.label :public
+    = f.check_box :public
+  .actions
+    = f.submit 'Save'

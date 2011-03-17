@@ -1,0 +1,29 @@
+%h1 Listing subscriptionses
+
+%table
+  %tr
+    %th Primary role
+    %th Secondary role
+    %th Tertiary role
+    %th Created at
+    %th Updated at
+    %th Commitment
+    %th
+    %th
+    %th
+
+  - @subscriptionses.each do |subscription|
+    %tr
+      %td= subscription.primary_role
+      %td= subscription.secondary_role
+      %td= subscription.tertiary_role
+      %td= subscription.created_at
+      %td= subscription.updated_at
+      %td= subscription.commitment
+      %td= link_to 'Show', subscription
+      %td= link_to 'Edit', edit_subscription_path(subscription)
+      %td= link_to 'Destroy', subscription, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Subscription', new_subscription_path

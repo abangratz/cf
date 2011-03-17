@@ -1,0 +1,27 @@
+%h1 Listing calendar_eventses
+
+%table
+  %tr
+    %th Title
+    %th Location
+    %th Start
+    %th End
+    %th Public
+    %th
+    %th
+    %th
+
+  - @calendar_eventses.each do |calendar_event|
+    %tr
+      %td= calendar_event.title
+      %td= calendar_event.location
+      %td= calendar_event.start
+      %td= calendar_event.end
+      %td= calendar_event.public
+      %td= link_to 'Show', calendar_event
+      %td= link_to 'Edit', edit_calendar_event_path(calendar_event)
+      %td= link_to 'Destroy', calendar_event, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Calendar event', new_calendar_event_path
