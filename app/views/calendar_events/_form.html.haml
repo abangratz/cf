@@ -7,19 +7,25 @@
           %li= msg
 
   .field
-    = f.label :title
+    = f.label :title 
+    %br/
     = f.text_field :title
   .field
     = f.label :location
+    %br/
     = f.text_field :location
   .field
     = f.label :start
-    = f.datetime_select :start
+    %br/
+    = text_field_tag :start_date, @calendar_event.start.andand.strftime("%F")
+    = text_field_tag :start_time, @calendar_event.start.andand.strftime("%R")
   .field
     = f.label :end
-    = f.datetime_select :end
+    %br/
+    = text_field_tag :end_date,  @calendar_event.end.andand.strftime("%F")
+    = text_field_tag :end_time,  @calendar_event.end.andand.strftime("%R")
   .field
-    = f.label :public
     = f.check_box :public
+    = f.label :public?
   .actions
     = f.submit 'Save'

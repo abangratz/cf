@@ -1,27 +1,13 @@
-%h1 Listing calendar_eventses
+- content_for :head do
+  = stylesheet_link_tag 'fullcalendar.css'
+  = stylesheet_link_tag 'calendrical.css'
+  = javascript_include_tag 'fullcalendar.min.js'
+  = javascript_include_tag 'jquery.calendrical.js'
+  = javascript_include_tag 'date.format.js'
+  = javascript_include_tag 'calendar.js'
 
-%table
-  %tr
-    %th Title
-    %th Location
-    %th Start
-    %th End
-    %th Public
-    %th
-    %th
-    %th
-
-  - @calendar_eventses.each do |calendar_event|
-    %tr
-      %td= calendar_event.title
-      %td= calendar_event.location
-      %td= calendar_event.start
-      %td= calendar_event.end
-      %td= calendar_event.public
-      %td= link_to 'Show', calendar_event
-      %td= link_to 'Edit', edit_calendar_event_path(calendar_event)
-      %td= link_to 'Destroy', calendar_event, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Calendar event', new_calendar_event_path
+#content.sequential
+  %h1 Calendar
+  #info_area
+  #dialog
+  #calendar

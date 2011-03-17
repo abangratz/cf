@@ -1,12 +1,13 @@
 class CalendarEventsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /calendar_events
   # GET /calendar_events.xml
   def index
-    @calendar_eventses = CalendarEvent.all
-
+    @calendar_events = CalendarEvent.all
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @calendar_eventses }
+      format.xml  { render :xml => @calendar_events }
+      format.json  { render :json => @calendar_events }
     end
   end
 
@@ -40,7 +41,10 @@ class CalendarEventsController < ApplicationController
   # POST /calendar_events
   # POST /calendar_events.xml
   def create
+    params[:calendar_event][:start] = params[:start_date] + ' ' + params[:start_time]
+    params[:calendar_event][:end] = params[:end_date] + ' ' + params[:end_time]
     @calendar_event = CalendarEvent.new(params[:calendar_event])
+    @calendar_event.user = current_user
 
     respond_to do |format|
       if @calendar_event.save

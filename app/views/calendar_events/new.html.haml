@@ -1,5 +1,13 @@
-%h1 New calendar_event
+- content_for :head do
+  = stylesheet_link_tag 'fullcalendar.css'
+  = stylesheet_link_tag 'calendrical.css'
+  = javascript_include_tag 'fullcalendar.min.js'
+  = javascript_include_tag 'jquery.calendrical.js'
+  = javascript_include_tag 'date.format.js'
+  = javascript_include_tag 'calendar.js'
 
-= render 'form'
+#content.sequential
+  %h1 New Event
 
-= link_to 'Back', calendar_eventses_path
+  = render 'form'
+

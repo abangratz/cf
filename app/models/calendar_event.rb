@@ -21,4 +21,13 @@ class CalendarEvent
   belongs_to :user
   has n, :subscriptions
 
+  def allDay
+    false
+  end
+
+  def to_json(options)
+    options = {:methods => [:allDay]}.merge(options)
+    super(options)
+  end
+
 end
