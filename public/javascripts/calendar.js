@@ -55,7 +55,7 @@ $(document).ready(function(){
                      content: {
                                 text: event.comment, 
                                 title: {
-                                  text: event.title,
+                                  text: event.title + (event.location ? ' @ ' + event.location : ''),
                                 },
                               },
                      style: {
