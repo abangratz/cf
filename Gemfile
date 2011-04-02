@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-DM_VERSION    = '~> 1.0.2'
+DM_VERSION    = '~> 1.1.0'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.5'
 
 gem 'jquery-rails'
 gem 'unicorn'
@@ -27,7 +27,8 @@ gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 gem 'dm-is-list',           DM_VERSION
-gem 'dm-devise'
+gem 'dm-rails',             DM_VERSION
+gem 'dm-devise',  :git => 'git://github.com/jm81/dm-devise.git'
 gem 'dm-paperclip', :git => 'git://github.com/abangratz/dm-paperclip.git'
 
 gem 'will_paginate', '~> 3.0.pre2'
