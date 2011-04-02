@@ -37,9 +37,12 @@ class User
   end
 
   def forum_groups
-    groups = ForumGroup.all
+    groups = ForumGroup.all.reload
     groups.map do |group|
-      forums = group.forums.select { |forum| self.can_read(forum) }
+      forums = group.forums.reload.select { |forum| Rails.logger.debug "Checking forum #{forum.name}"; self.can_read(forum) }
+      Rails.logger.debug "Forums: #{forums.count}"
+      Rails.logger.debug "Forums raw: #{group.forums.count}"
+      Rails.logger.debug self
       forums.count > 0 ? group : nil
     end.compact
   end
@@ -56,6 +59,10 @@ class User
 
   def member?
     self.role.member?
+  end
+
+  def to_s
+    "#{super}(#{id}): email='#{email}', nickname='#{nickname}'"
   end
 
 end

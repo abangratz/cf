@@ -25,10 +25,11 @@ class CalendarEventsController < ApplicationController
   # GET /calendar_events/new
   # GET /calendar_events/new.xml
   def new
-    @calendar_event = CalendarEvent.new
+    @calendar_event = CalendarEvent.new(params[:event])
+    logger.debug @calendar_event.start
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :layout => false }
       format.xml  { render :xml => @calendar_event }
     end
   end
@@ -50,9 +51,11 @@ class CalendarEventsController < ApplicationController
       if @calendar_event.save
         format.html { redirect_to(@calendar_event, :notice => 'Calendar event was successfully created.') }
         format.xml  { render :xml => @calendar_event, :status => :created, :location => @calendar_event }
+        format.js { head :status => :created, :location => @calendar_event }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @calendar_event.errors, :status => :unprocessable_entity }
+        format.js { render :js => @comment.errors, :status => :unprocessable_entity }
       end
     end
   end

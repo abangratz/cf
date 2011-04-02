@@ -20,6 +20,7 @@ class CalendarEvent
 
   belongs_to :user
   has n, :subscriptions
+  has n, :event_slots
 
   def allDay
     false

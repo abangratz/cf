@@ -14,22 +14,54 @@ $(document).ready(function(){
     select: function(startDate, endDate, allDay, jsEvent, view) {
       var form = $("#dialog").dialog({
         title: "Add Event",
-        modal: true
-      }).load('/calendar_events/new', function() {
-        form = $(this).find('form');
-        form.find(':text:first').focus();
-        starts_date = $('#start_date');
-        starts_date.val(startDate.format('isoDate'));
-        starts_time = $('#start_time');
-        starts_time.val(startDate.format('HH:MM'));
-        ends_date = $('#end_date');
-        ends_date.val(endDate.format('isoDate'));
-        ends_time = $('#end_time');
-        ends_time.val(endDate.format('HH:MM'));
+        modal: true,
+        minWidth: 650,
+        minHeight: 500,
+      }).load('/calendar_events/new', "event[start]=" + escape(startDate.format('isoDateTime')) + "&event[end]=" + escape(endDate.format('isoDateTime')), function() {
+        btn = form.find(':submit');
+        var txt = btn.val();
+        btn.remove();
+        var buttons = {};
+        var method = form.find("form").attr('method');
+        console.log(method);
+        var action = form.find("form").attr('action');
+        console.log(action);
+        buttons[txt] = function() {
+          $.ajax({
+            type: method,
+            url: action,
+            data: form.find('form').serialize() ,
+            dataType: 'script',
+            success: function (data, status, xhr) {
+              $('#calendar').fullCalendar('refetchEvents');
+            }
+
+          });
+          $(this).dialog('close');
+          $(this).dialog('destroy');
+        };
+        buttons['Cancel'] = function() {
+          $(this).dialog('close');
+          $(this).dialog('destroy');
+        }
+        $(this).dialog('option', 'buttons', buttons);
       });
     },
     eventClick: function(event) {
                   window.location.href = '/calendar_events/'+event.id;
                 },
+    eventRender: function(event, element) {
+                   element.qtip({
+                     content: {
+                                text: event.comment, 
+                                title: {
+                                  text: event.title,
+                                },
+                              },
+                     style: {
+                       tip: 'topLeft'
+                     }
+                   })
+                 },
   });
 });
