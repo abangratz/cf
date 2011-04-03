@@ -4,8 +4,8 @@ class CalendarEvent
 
   property :id, Serial
 
-  property :title, String
-  property :location, String
+  property :title, String, :required => true, :length => 10..50
+  property :location, String, :required => true, :length => 5..50
   property :comment, Text
   property :start, DateTime
   property :end, DateTime
@@ -20,7 +20,8 @@ class CalendarEvent
 
   belongs_to :user
   has n, :subscriptions
-  has n, :event_slots
+
+  validates_length_of :comment, :min => 15
 
   def allDay
     false

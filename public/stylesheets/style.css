@@ -138,3 +138,31 @@ table.tablesorter tbody td a {
   text-decoration: underline;
   font-weight: bold;
 }
+
+table.subscriptions {
+  width: 90%;
+  margin: 6px;
+  padding-left: 5px;
+  padding-right: 15px;
+  border-collapse:collapse;
+}
+
+table.subscriptions td, table.subscriptions th {
+  border-bottom: 1px solid black;
+  padding: 6px;
+}
+
+table.subscriptions tbody tr td.center {
+  text-align: center;
+}
+
+div.field label {
+  font-weight: bold;
+}
+
+div.field span.helptext {
+  font-weight: normal;
+  font-size: 85%;
+  display: inline-block;
+  font-style: italic;
+}

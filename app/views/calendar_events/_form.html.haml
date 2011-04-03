@@ -8,10 +8,14 @@
 
   .field
     = f.label :title 
+    %span.helptext 
+      %em (Between 10 and 50 characters)
     %br/
     = f.text_field :title
   .field
     = f.label :location
+    %span.helptext 
+      %em (Between 5 and 50 characters)
     %br/
     = f.text_field :location
   .field
@@ -26,6 +30,8 @@
     = text_field_tag :end_time,  @calendar_event.end.andand.strftime("%R")
   .field
     = f.label :comment
+    %span.helptext 
+      %em (At least 15 characters)
     %br/
     = f.text_area :comment, :rows => 15, :cols => 45
   .field

@@ -23,6 +23,7 @@
           %li= link_to "home", root_url
           %li= link_to "forum", forum_groups_url
           %li= link_to "roster", roster_url
+          %li= link_to "calendar", calendar_events_url
           - if user_signed_in?
             %li= link_to "profile", current_user.profile ? profile_url(current_user.profile) : new_profile_url
             %li= link_to "logout", destroy_user_session_url

@@ -5,6 +5,7 @@
       %th Nickname
       %th Role
       %th Ex-Member
+      %th Calendar Admin
       %th{:colspan => 2} 
   %tbody
     - @users.each do |user|
@@ -12,6 +13,7 @@
         %td= link_to user.nickname, [:administration, user]
         %td= user.role.name
         %td= user.ex_member
+        %td= user.calendar_admin
         %td= link_to 'Edit', edit_administration_user_path(user)
         %td= link_to 'Destroy', [:administration, user], :confirm => 'Are you sure?', :method => :delete
 %h2 Role Statistics

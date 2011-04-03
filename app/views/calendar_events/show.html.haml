@@ -1,21 +1,93 @@
-%p#notice= notice
+- content_for :head do
+  = stylesheet_link_tag 'fullcalendar.css'
+  = stylesheet_link_tag 'calendrical.css'
+  = javascript_include_tag 'fullcalendar.min.js'
+  = javascript_include_tag 'jquery.calendrical.js'
+  = javascript_include_tag 'date.format.js'
+  = javascript_include_tag 'calendar.js'
+  = csrf_meta_tag
+#content.sequential
+  =link_to "Back", calendar_events_url
+  %h1 Calendar Event:
+  .posting
+    .author
+      Author: #{@calendar_event.user.profile.nickname}#{image_tag @calendar_event.user.profile.avatar.url}
+    .content
+      .header
+        %h2
+          = @calendar_event.title
+          &nbsp;@&nbsp; 
+          = @calendar_event.location
+        .navigation
+          = link_to('Edit', edit_calendar_event_path(@calendar_event), :class => "button") if @calendar_event.user = current_user || current_user.calendar_admin
+          = link_to('Delete', @calendar_event, :confirm => "Are you sure?", :method => :delete, :class => "button") if @calendar_event.user = current_user || current_user.calendar_admin
+      .body= @calendar_event.comment
+      .clear
+      .footer &nbsp;
+  %h2 Registered: #{@calendar_event.subscriptions.count}
+  .topic
+    %table.subscriptions
+      %colgroup
+        %col{:width=>"2*"}
+        %col{:width=>"2*"}
+        %col{:width=>"2*"}
+        %col{:width=>"2*"}
+        %col{:width=>"1*"}
+        %col{:width=>"1*"}
+        %col{:width=>"1*"}
+      %thead
+        %tr
+          %th Character
+          %th Primary Role
+          %th Secondary Role
+          %th Tertiary Role
+          %th Commited?
+          %th Confirmed?
+          %th &nbsp;
+      %tbody
+        - @calendar_event.subscriptions.each do |subscription|
+          - next if subscription.new?
+          %tr{:id => ['subscription', 'row', subscription.id]}
+            %td= subscription.character.andand.name
+            %td= subscription.primary_role
+            %td= subscription.secondary_role
+            %td= subscription.tertiary_role
+            %td= subscription.commitment
+            %td= check_box_tag "confirm_subscription[#{subscription.id}]", true, subscription.confirmed?, :disabled => (current_user != @calendar_event.user), :class => 'confirmation_box', :'data-url' => toggle_confirm_subscription_path(subscription)
+            %td &nbsp;
+  %h2 Subscribe to Event:
+  .topic
+    =form_for(@subscription, :remote => true, :html=> {:'data-type' => 'json', :id => 'edit-sub'}) do |f|
+      %table.subscriptions
+        %colgroup
+          %col{:width=>"2*"}
+          %col{:width=>"2*"}
+          %col{:width=>"2*"}
+          %col{:width=>"2*"}
+          %col{:width=>"1*"}
+          %col{:width=>"1*"}
+          %col{:width=>"1*"}
+        %thead
+          %tr
+            %th Character
+            %th Primary Role
+            %th Secondary Role
+            %th Tertiary Role
+            %th Commited?
+            %th Confirmed?
+            %th &nbsp;
+        %tbody
+        %tr
+          %td= f.collection_select :character_name, current_user.profile.characters, :name, :name
+          %td= f.select :primary_role, Subscription::ROLE_NAMES, {:include_blank => true }
+          %td= f.select :secondary_role, Subscription::ROLE_NAMES, {:include_blank => true }
+          %td= f.select :tertiary_role, Subscription::ROLE_NAMES, {:include_blank => true }
+          %td= f.select :commitment, Subscription::COMMITMENTS
+          %td
+            = f.hidden_field :calendar_event_id
+            = f.hidden_field :id
+          %td.center= f.submit
 
-%p
-  %b Title:
-  = @calendar_event.title
-%p
-  %b Location:
-  = @calendar_event.location
-%p
-  %b Start:
-  = @calendar_event.start
-%p
-  %b End:
-  = @calendar_event.end
-%p
-  %b Public:
-  = @calendar_event.public
+  =link_to "Back", calendar_events_url
 
-= link_to 'Edit', edit_calendar_event_path(@calendar_event)
-\|
-= link_to 'Back', calendar_events_path
+

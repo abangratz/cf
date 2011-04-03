@@ -26,10 +26,10 @@ Devise.setup do |config|
   # config.params_authenticatable = true
 
   # Tell if authentication through HTTP Basic Auth is enabled. False by default.
-  # config.http_authenticatable = false
+  config.http_authenticatable = false
 
   # Set this to true to use Basic Auth for AJAX requests.  True by default.
-  # config.http_authenticatable_on_xhr = true
+  config.http_authenticatable_on_xhr = false
 
   # The realm used in Http Basic Authentication
   # config.http_authentication_realm = "Application"
@@ -39,11 +39,6 @@ Devise.setup do |config|
   # using other encryptors, it sets how many times you want the password re-encrypted.
   config.stretches = 10
 
-  # Define which will be the encryption algorithm. Devise also supports encryptors
-  # from others authentication tools as :clearance_sha1, :authlogic_sha512 (then
-  # you should set stretches above to 20 for default behavior) and :restful_authentication_sha1
-  # (then you should set stretches to 10, and copy REST_AUTH_SITE_KEY to pepper)
-  config.encryptor = :bcrypt
 
   # Setup a pepper to generate the encrypted password.
   config.pepper = "d78e4641a4dd5e0c5709501541790ef630dfb98f5cc3e7cdf7cf959d3bef67c15797c3b0f71eebf062c9dcc2521e71e8835a0dfafc0b6050e0c19a8e294e0557"

@@ -11,6 +11,7 @@ class User
 
   property :nickname, String, :required => true, :unique => true
   property :ex_member, Boolean, :default => false
+  property :calendar_admin, Boolean, :default => false
 
   belongs_to :role
   has n, :topics, :child_key => [ :author_id ]
@@ -40,9 +41,6 @@ class User
     groups = ForumGroup.all.reload
     groups.map do |group|
       forums = group.forums.reload.select { |forum| Rails.logger.debug "Checking forum #{forum.name}"; self.can_read(forum) }
-      Rails.logger.debug "Forums: #{forums.count}"
-      Rails.logger.debug "Forums raw: #{group.forums.count}"
-      Rails.logger.debug self
       forums.count > 0 ? group : nil
     end.compact
   end

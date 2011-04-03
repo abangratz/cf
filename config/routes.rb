@@ -1,6 +1,10 @@
 Cf::Application.routes.draw do
 
-  resources :subscriptions
+  resources :subscriptions, :only => [:create, :update] do
+    member do
+      post :toggle_confirm
+    end
+  end
 
   resources :calendar_events
 

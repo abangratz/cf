@@ -1,5 +1,8 @@
 class Subscription
 
+  ROLE_NAMES = %w{Damage Healer Tank Support}
+  COMMITMENTS = %w{Sure Tentative Maybe No Can't}
+
   include DataMapper::Resource
 
   property :id, Serial
@@ -15,5 +18,10 @@ class Subscription
   
   belongs_to :calendar_event
   belongs_to :character
+
+  def toggle_confirmation
+    self.confirmed = !self.confirmed
+    save!
+  end
 
 end

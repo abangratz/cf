@@ -3,7 +3,12 @@ class CalendarEventsController < ApplicationController
   # GET /calendar_events
   # GET /calendar_events.xml
   def index
-    @calendar_events = CalendarEvent.all
+    if params[:start] && params[:end]
+      the_range = Time.at(params[:start].to_i)..Time.at(params[:end].to_i)
+      @calendar_events = CalendarEvent.all(:start => the_range)
+    else
+      @calendar_events = CalendarEvent.all
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @calendar_events }
@@ -15,6 +20,7 @@ class CalendarEventsController < ApplicationController
   # GET /calendar_events/1.xml
   def show
     @calendar_event = CalendarEvent.get(params[:id])
+    @subscription = Subscription.first(:calendar_event => @calendar_event, :character => {:profile =>{:user => current_user}}) || @calendar_event.subscriptions.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -51,11 +57,11 @@ class CalendarEventsController < ApplicationController
       if @calendar_event.save
         format.html { redirect_to(@calendar_event, :notice => 'Calendar event was successfully created.') }
         format.xml  { render :xml => @calendar_event, :status => :created, :location => @calendar_event }
-        format.js { head :status => :created, :location => @calendar_event }
+        format.json { render :json => @calendar_event, :status => :created }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @calendar_event.errors, :status => :unprocessable_entity }
-        format.js { render :js => @comment.errors, :status => :unprocessable_entity }
+        format.json { render :json => @calendar_event.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -83,7 +89,7 @@ class CalendarEventsController < ApplicationController
     @calendar_event.destroy
 
     respond_to do |format|
-      format.html { redirect_to(calendar_eventses_url) }
+      format.html { redirect_to(calendar_events_url) }
       format.xml  { head :ok }
     end
   end
