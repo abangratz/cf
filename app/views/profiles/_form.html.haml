@@ -18,6 +18,9 @@
     = f.check_box :public_alts
     = f.label :public_alts, "Others can see my alts?"
   .field
+    = f.label :time_zone
+    = f.time_zone_select :time_zone
+  .field
     = f.label :avatar
     %br/
     = image_tag @profile.avatar.url

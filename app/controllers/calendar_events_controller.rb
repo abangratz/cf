@@ -70,14 +70,23 @@ class CalendarEventsController < ApplicationController
   # PUT /calendar_events/1.xml
   def update
     @calendar_event = CalendarEvent.get(params[:id])
+    if params[:start_date] && params[:end_date]
+      params[:calendar_event][:start] = params[:start_date] + ' ' + params[:start_time]
+      params[:calendar_event][:end] = params[:end_date] + ' ' + params[:end_time]
+    end
 
+    params[:calendar_event][:start] = Time.zone.parse(params[:calendar_event][:start]).to_s
+    params[:calendar_event][:end] = Time.zone.parse(params[:calendar_event][:end]).to_s
+
+    logger.debug(params)
     respond_to do |format|
       if @calendar_event.update(params[:calendar_event])
         format.html { redirect_to(@calendar_event, :notice => 'Calendar event was successfully updated.') }
         format.xml  { head :ok }
+        format.json  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @calendar_event.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @calendar_event.errors, :status => :unprocessable_entity }
       end
     end
   end

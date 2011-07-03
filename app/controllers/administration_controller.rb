@@ -34,14 +34,15 @@ class AdministrationController < ApplicationController
           :personalnote => membernode.xpath('.//PersonalNotes').first.content,
           :officernote => officernote,
           :guildxp => membernode.xpath('.//GuildXPContribution').first.content,
-          :main_name => main_name,
           :profile => profile
         }
         if Character::ALT_RANK_IDS.include?(rank.to_i)
+          attributes[:main_name] = main_name
           alts << attributes
         else
           character = Character.first(:name => name) || Character.create
           attributes.delete(:profile) if character.profile
+          logger.debug attributes
           character.attributes = attributes
           character.save!
           new_characters << character
@@ -50,6 +51,7 @@ class AdministrationController < ApplicationController
       alts.each do |attributes|
         character = Character.first(:name => attributes[:name] ) || Character.new
         attributes.delete(:profile) if character.profile
+        attributes.delete(:main_name) unless Character.find(:name => attributes[:main_name])
         character.attributes = attributes
         character.save!
         new_characters << character

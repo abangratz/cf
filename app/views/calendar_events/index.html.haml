@@ -7,7 +7,8 @@
   = javascript_include_tag 'calendar.js'
 
 #content.sequential
-  %h1 Calendar
+  %h1 Calendar 
+  %p= current_user.profile.time_zone
   #info_area
   #dialog
   #calendar

@@ -21,12 +21,19 @@
         .navigation
           = link_to('Edit', edit_calendar_event_path(@calendar_event), :class => "button") if @calendar_event.user = current_user || current_user.calendar_admin
           = link_to('Delete', @calendar_event, :confirm => "Are you sure?", :method => :delete, :class => "button") if @calendar_event.user = current_user || current_user.calendar_admin
-      .body= @calendar_event.comment
+      .body 
+        %p 
+          Start: 
+          = @calendar_event.start
+          %br
+          End:
+          = @calendar_event.end
+        =@calendar_event.comment
       .clear
       .footer &nbsp;
   %h2 Registered: #{@calendar_event.subscriptions.count}
   .topic
-    %table.subscriptions
+    %table#subscriptions.subscriptions
       %colgroup
         %col{:width=>"2*"}
         %col{:width=>"2*"}

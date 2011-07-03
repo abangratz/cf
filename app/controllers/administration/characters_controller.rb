@@ -67,7 +67,7 @@ class Administration::CharactersController < AdministrationController
     params[:character] = params[:character].map { |x,y| [x, y.empty? ? nil : y ] }.to_hash
 
     respond_to do |format|
-      if @character.update_attributes(params[:character])
+      if @character.update(params[:character])
         format.html { redirect_to([:administration, @character], :notice => 'Character was successfully updated.') }
         format.xml  { head :ok }
       else

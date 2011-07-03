@@ -21,6 +21,9 @@
         %b Signature:
         .sigdisplay
           = raw @profile.signature_html
+      %p
+        %b Time Zone:
+        = @profile.time_zone
       - if user_signed_in? && current_user.member?
         = link_to 'Edit', edit_profile_path, :class => "button" unless @profile != current_user.profile
   #characters-tab

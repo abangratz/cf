@@ -23,12 +23,20 @@ class CalendarEvent
 
   validates_length_of :comment, :min => 15
 
+  def start
+    super.in_time_zone.to_datetime
+  end
+
+  def end
+    super.in_time_zone.to_datetime
+  end
+
   def allDay
     false
   end
 
   def to_json(options)
-    options = {:methods => [:allDay]}.merge(options)
+    options = {:methods => [:start, :end, :allDay]}.merge(options)
     super(options)
   end
 

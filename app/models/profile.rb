@@ -11,6 +11,7 @@ class Profile
   property :signature_html, Text
   property :public, Boolean, :default => false
   property :public_alts, Boolean, :default => false
+  property :time_zone, String, :default => 'UTC'
 
   property :created_at, DateTime
   property :updated_at, DateTime

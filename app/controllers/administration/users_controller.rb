@@ -15,7 +15,7 @@ class Administration::UsersController < AdministrationController
   # GET /administration/users/1
   # GET /administration/users/1.xml
   def show
-    @user = User.find(params[:id])
+    @user = User.first(:id => params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class Administration::UsersController < AdministrationController
 
   # GET /administration/users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = User.first(:id => params[:id])
     @roles = Role.all
   end
 
@@ -60,7 +60,7 @@ class Administration::UsersController < AdministrationController
   # PUT /administration/users/1
   # PUT /administration/users/1.xml
   def update
-    @user = User.find(params[:id])
+    @user = User.first(:id => params[:id])
     params[:user].delete_if {|k, v| k =~ /^password/ && v == ""}
     respond_to do |format|
       if @user.update_attributes(params[:user])

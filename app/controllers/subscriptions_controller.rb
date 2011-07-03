@@ -5,7 +5,9 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.xml
   def create
-    @subscription = Subscription.new(params[:subscription])
+    s_params = params[:subscription]
+    s_params.delete(:id)
+    @subscription = Subscription.new(s_params)
     @subscription.save
     respond_with(@subscription)
   end

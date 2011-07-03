@@ -3,9 +3,18 @@ $(document).ready(function(){
   $("#start_date, #start_time, #end_date, #end_time").calendricalDateTimeRange();
   $("#edit-sub")
     .bind("ajax:success", function(event, data, status, xhr) {
+      if (xhr.status == 201) {
+        $("#subscription_submit").val('Update Subscription');
+        $("#edit-sub").attr("action", "/subscriptions/" + data.id);
+        $("#edit-sub").find("div:first-child").append('<input type="hidden" value="put" name="_method">');
+        $('#subscription_id').val(data.id);
+        var $new_line = $('<tr id="subscription_row_' + data.id +'"><td></td><td></td><td></td><td></td><td></td><td></td><td>&nbsp;</td></tr>');
+        $new_line.find('td:nth-child(6)').append('<input id="confirm_subscription_' + data.id + '" class="confirmation_box" type="checkbox" value="true" name="confirm_subscription[' + data.id + ']" data-url="/subscriptions/' + data.id + '/toggle_confirm">');
+        $('#subscriptions tbody').append($new_line);
+      }
       id = $('#subscription_id').val();
-      console.log(id);
       row_id = "#subscription_row_"+id;
+      console.log(row_id);
       console.log($(row_id).find('td'));
       $(row_id).find('td:nth-child(1)').text($('#subscription_character_name').val());
       $(row_id).find('td:nth-child(2)').text($('#subscription_primary_role').val());
@@ -42,6 +51,7 @@ $(document).ready(function(){
     allDaySlot: false,
     defaultView: 'agendaWeek',
     firstHour: 15,
+    //ignoreTimezone: false,
     theme: true,
     header: {
       left:  'prev,next today',
@@ -143,5 +153,27 @@ $(document).ready(function(){
                      }
                    })
                  },
+    eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+                 console.log(event);
+                 $.ajax({
+                   type: 'PUT',
+                   url: '/calendar_events/' + event.id,
+                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('yyyy-mm-dd HH:MM:ss'), "end": event.end.format('yyyy-mm-dd HH:MM:ss')}},
+                   dataType: 'json',
+                   error: function(xhr) {
+                   }
+                 });
+               },
+    eventResize: function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+                 console.log(event);
+                 $.ajax({
+                   type: 'PUT',
+                   url: '/calendar_events/' + event.id,
+                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('yyyy-mm-dd HH:MM:ss'), "end": event.end.format('yyyy-mm-dd HH:MM:ss')}},
+                   dataType: 'json',
+                   error: function(xhr) {
+                   }
+                 });
+               },
   });
 });
