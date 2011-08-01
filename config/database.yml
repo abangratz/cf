@@ -1,0 +1,15 @@
+default: &common
+  adapter: postgresql
+  username: cf
+
+development:
+  <<: *common
+  database: cf_dev
+
+test:
+  <<: *common
+  database: cf_test
+
+production:
+  <<: *common
+  database: cf

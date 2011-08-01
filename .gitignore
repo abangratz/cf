@@ -9,6 +9,5 @@ log/*.log
 tmp/**/*
 vendor/ruby/**/*
 .*.swp
-config/database.yml
 nbproject/
 bin/
