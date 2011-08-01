@@ -1,13 +1,13 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
 require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, 'ruby-1.9.2-p136@cf'        # Or whatever env you want it to run in.
+set :rvm_ruby_string, 'ruby-1.9.2@cf'        # Or whatever env you want it to run in.
 set :application, "cf"
-set :repository,  "gitosis@sensor.twincode.net:cf.git"
-set :deploy_to, "/var/www/blood-covenant.eu/#{application}"
+set :repository,  "git@github.com:abangratz/cf.git"
+set :deploy_to, "/var/www/rails/#{application}"
 ssh_options[:forward_agent] = true
 
 set :scm, :git
-set :user, :"blood-cov-eu"
+set :user, :"www-cf-eu"
 set :use_sudo, false
 
 set :rails_env, :production
@@ -15,9 +15,9 @@ set :unicorn_binary, "bundle exec unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
-role :web, "zerberos.secure.at"                          # Your HTTP server, Apache/etc
-role :app, "zerberos.secure.at"                          # This may be the same as your `Web` server
-role :db,  "zerberos.secure.at", :primary => true # This is where Rails migrations will run
+role :web, "web.critical-failure.eu"                          # Your HTTP server, Apache/etc
+role :app, "web.critical-failure.eu"                          # This may be the same as your `Web` server
+role :db,  "web.critical-failure.eu", :primary => true # This is where Rails migrations will run
 
 namespace :deploy do
    task :start, :roles => :app, :except => { :no_release => true } do 
