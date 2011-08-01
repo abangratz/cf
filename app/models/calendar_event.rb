@@ -19,7 +19,7 @@ class CalendarEvent
   property :deleted_at, ParanoidDateTime
 
   belongs_to :user
-  has n, :subscriptions
+  has n, :subscriptions, :constraint => :destroy!
 
   #validates_length_of :comment, :min => 15
 

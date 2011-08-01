@@ -72,8 +72,11 @@ class CalendarEventsController < ApplicationController
   def update
     @calendar_event = CalendarEvent.get(params[:id])
     if params[:start_date] && params[:end_date]
-      params[:calendar_event][:start] = params[:start_date] + ' ' + params[:start_time]
-      params[:calendar_event][:end] = params[:end_date] + ' ' + params[:end_time]
+      params[:calendar_event][:start] = Time.zone.parse(params[:start_date] + ' ' + params[:start_time])
+      params[:calendar_event][:end] = Time.zone.parse(params[:end_date] + ' ' + params[:end_time])
+    else
+      params[:calendar_event][:start] = Time.zone.parse(params[:calendar_event][:start])
+      params[:calendar_event][:end] = Time.zone.parse(params[:calendar_event][:end])
     end
 
 
@@ -94,7 +97,7 @@ class CalendarEventsController < ApplicationController
   # DELETE /calendar_events/1.xml
   def destroy
     @calendar_event = CalendarEvent.get(params[:id])
-    @calendar_event.destroy
+    @calendar_event.destroy if current_user == @calendar_event.user || current_user.calendar_admin?
 
     respond_to do |format|
       format.html { redirect_to(calendar_events_url) }
