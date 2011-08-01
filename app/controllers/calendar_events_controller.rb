@@ -5,7 +5,7 @@ class CalendarEventsController < ApplicationController
   def index
     if params[:start] && params[:end]
       the_range = Time.at(params[:start].to_i)..Time.at(params[:end].to_i)
-      @calendar_events = CalendarEvent.all(:start => the_range)
+      @calendar_events = CalendarEvent.all(:utc_start.gte => the_range.first, :utc_start.lte => the_range.last)
     else
       @calendar_events = CalendarEvent.all
     end
@@ -48,8 +48,9 @@ class CalendarEventsController < ApplicationController
   # POST /calendar_events
   # POST /calendar_events.xml
   def create
-    params[:calendar_event][:start] = params[:start_date] + ' ' + params[:start_time]
-    params[:calendar_event][:end] = params[:end_date] + ' ' + params[:end_time]
+    params[:calendar_event][:start] = Time.zone.parse(params[:start_date] + ' ' + params[:start_time] )
+    params[:calendar_event][:end] = Time.zone.parse(params[:end_date] + ' ' + params[:end_time] )
+    logger.debug params
     @calendar_event = CalendarEvent.new(params[:calendar_event])
     @calendar_event.user = current_user
 
@@ -75,8 +76,6 @@ class CalendarEventsController < ApplicationController
       params[:calendar_event][:end] = params[:end_date] + ' ' + params[:end_time]
     end
 
-    params[:calendar_event][:start] = Time.zone.parse(params[:calendar_event][:start]).to_s
-    params[:calendar_event][:end] = Time.zone.parse(params[:calendar_event][:end]).to_s
 
     logger.debug(params)
     respond_to do |format|

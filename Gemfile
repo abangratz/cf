@@ -28,6 +28,7 @@ gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 gem 'dm-is-list',           DM_VERSION
 gem 'dm-rails',             DM_VERSION
+gem 'dm-zone-types'
 gem 'dm-devise',  :git => 'git://github.com/jm81/dm-devise.git'
 gem 'dm-paperclip', :git => 'git://github.com/abangratz/dm-paperclip.git'
 
@@ -36,6 +37,9 @@ gem 'will_paginate', '~> 3.0.pre2'
 gem 'bb-ruby'
 gem 'andand'
 
+group :development, :test do
+  gem 'pry'
+end
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

@@ -51,7 +51,7 @@ $(document).ready(function(){
     allDaySlot: false,
     defaultView: 'agendaWeek',
     firstHour: 15,
-    //ignoreTimezone: false,
+    ignoreTimezone: true,
     theme: true,
     header: {
       left:  'prev,next today',
@@ -72,7 +72,7 @@ $(document).ready(function(){
         minWidth: 650,
         minHeight: 500,
         autoOpen: false,
-      }).load('/calendar_events/new', "event[start]=" + escape(startDate.format('isoDateTime')) + "&event[end]=" + escape(endDate.format('isoDateTime')), function() {
+      }).load('/calendar_events/new', "event[start]=" + escape(startDate.format('yyyy-mm-dd HH:MM:ss')) + "&event[end]=" + escape(endDate.format('yyyy-mm-dd HH:MM:ss')), function() {
         btn = form.find(':submit');
         var txt = btn.val();
         btn.remove();
@@ -158,7 +158,7 @@ $(document).ready(function(){
                  $.ajax({
                    type: 'PUT',
                    url: '/calendar_events/' + event.id,
-                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('yyyy-mm-dd HH:MM:ss'), "end": event.end.format('yyyy-mm-dd HH:MM:ss')}},
+                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('isoDateTime'), "end": event.end.format('isoDateTime')}},
                    dataType: 'json',
                    error: function(xhr) {
                    }
@@ -169,7 +169,7 @@ $(document).ready(function(){
                  $.ajax({
                    type: 'PUT',
                    url: '/calendar_events/' + event.id,
-                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('yyyy-mm-dd HH:MM:ss'), "end": event.end.format('yyyy-mm-dd HH:MM:ss')}},
+                   data: {"calendar_event": {"id" : event.id, "start": event.start.format('isoDateTime'), "end": event.end.format('isoDateTime')}},
                    dataType: 'json',
                    error: function(xhr) {
                    }
