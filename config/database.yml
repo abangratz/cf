@@ -1,15 +1,14 @@
-default: &common
+development:
   adapter: postgresql
   username: cf
-
-development:
-  <<: *common
   database: cf_dev
 
 test:
-  <<: *common
+  adapter: postgresql
+  username: cf
   database: cf_test
 
 production:
-  <<: *common
+  adapter: postgresql
+  username: cf
   database: cf
