@@ -38,6 +38,13 @@ Cf::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
   #
   config.action_mailer.default_url_options = { :host => 'critical-failure.eu' }
+  config.action_mailer.smtp_settings = {
+    :address          => 'localhost',
+    :port             => 25,
+    :domain           => 'critical-failure.eu',
+    :enable_starttls_auto => true,
+    :openssl_verify_mode => 'none',
+  }
 
   # Enable threaded mode
   # config.threadsafe!
