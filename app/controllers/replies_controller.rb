@@ -70,7 +70,7 @@ class RepliesController < ApplicationController
     @reply = Reply.get(params[:id])
 
     respond_to do |format|
-      if @reply.update_attributes(params[:reply])
+      if @reply.update(params[:reply])
         format.html { redirect_to(@topic, :notice => 'Reply was successfully updated.') }
         format.xml  { head :ok }
       else

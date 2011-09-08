@@ -61,7 +61,7 @@ class Administration::ArticlesController < AdministrationController
     @article = Article.first(:slug => params[:id])
 
     respond_to do |format|
-      if @article.update_attributes(params[:article])
+      if @article.update(params[:article])
         format.html { redirect_to(administration_article_path(@article), :notice => 'Article was successfully updated.') }
         format.xml  { head :ok }
       else

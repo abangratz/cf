@@ -63,7 +63,7 @@ class Administration::UsersController < AdministrationController
     @user = User.first(:id => params[:id])
     params[:user].delete_if {|k, v| k =~ /^password/ && v == ""}
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update(params[:user])
         format.html { redirect_to(administration_user_url(@user), :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
