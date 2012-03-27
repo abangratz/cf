@@ -2,5 +2,5 @@
   .left
     = link_to forum.name, [forum.forum_group, forum]  if current_user.can_read(forum)
   .right
-    Topics: #{forum.topics.count} #{"(unread)" if current_user.forum_unread?(forum) && forum.topics && forum.topics.count > 0}
+    Topics: #{forum.topics.count} #{"(unread)" if current_user.forum_unread?(forum) && forum.topics && forum.topics.count && forum.topics.count > 0}
   .clear
