@@ -52,7 +52,7 @@ class User
 
   def forum_unread?(forum)
     marked = self.marked_forums.first(:forum => forum)
-    marked.nil? || forum.last_activity_at > marked.last_read_at
+    marked.nil? || (forum.last_activity_at && forum.last_activity_at > marked.last_read_at)
   end
 
   def member?
